@@ -137,10 +137,12 @@ module decoder #(
     output reg [(2**WIDTH)-1:0] out  
 );  
     always @(*) begin   
-        out <= 0; 
         if (en) begin  
             out[in] <= 1'b1; 
         end 
+        else begin
+            out <= 0; 
+        end
     end 
 
 endmodule  

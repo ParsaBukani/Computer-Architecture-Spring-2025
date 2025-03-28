@@ -47,6 +47,7 @@ module stack_dp #(
     end
 endmodule
 
+
 module stack_ctl (
     input wire clk,
     input wire rst,
@@ -99,6 +100,7 @@ module stack_ctl (
     end
 endmodule
 
+
 module stack #(  
     parameter WIDTH = 2,  
     parameter LENGTH = 8  
@@ -113,7 +115,6 @@ module stack #(
     output reg full,  
     output reg empty
 );  
-
     wire encnt;
     wire count_up;
     wire count_down;
