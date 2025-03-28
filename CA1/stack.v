@@ -1,5 +1,5 @@
 `timescale 1ns/1ns
-`include "lib.v"
+// `include "lib.v"
 
 module stack_dp #(
     parameter WIDTH = 2,
@@ -15,11 +15,11 @@ module stack_dp #(
     input wire count_down,
     input wire [WIDTH-1:0] data_in,
     output reg [WIDTH-1:0] data_out,
-    output reg overflow,
-    output reg underflow
+    output overflow,
+    output underflow
 );
 
-    reg [(LENGTH - 1):0] cntout;
+    wire [(LENGTH - 1):0] cntout;
 
     up_down_counter #(LENGTH) cnt (
         .clk(clk),
@@ -98,6 +98,7 @@ module stack_ctl (
             end
         endcase
     end
+    
 endmodule
 
 
@@ -158,4 +159,5 @@ module stack #(
     assign full = overflow;
     assign empty = underflow;
 
-endmodule  
+endmodule 
+
