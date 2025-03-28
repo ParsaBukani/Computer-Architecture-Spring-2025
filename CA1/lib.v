@@ -12,7 +12,6 @@ module memory_block #(
     input wire data_in,
     output reg data_out
 );
-
     reg [0:0] mem [0:WIDTH-1][0:HEIGHT-1];
 
     always @(*) begin
@@ -163,6 +162,6 @@ module mux #(
             out = data[sel]; 
         end
     end
-endmodule
 
+endmodule
 
