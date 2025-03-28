@@ -39,7 +39,7 @@ module counter #(
     input wire init,
     input wire [(m - 1):0] pin,
     output reg [(m - 1):0] cntout,
-    output co
+    output wire co
 );
     always @(posedge clk or posedge rst) begin
         if (rst)
@@ -73,8 +73,8 @@ module up_down_counter #(
     input wire count_down,
     input wire [(m - 1):0] pin,
     output reg [(m - 1):0] cntout,
-    output reg overflow,
-    output reg underflow
+    output wire overflow,
+    output wire underflow
 );
     always @(posedge clk or posedge rst) begin
         if (rst)
@@ -137,12 +137,10 @@ module decoder #(
     output reg [(2**WIDTH)-1:0] out  
 );  
     always @(*) begin   
+        out <= 0; 
         if (en) begin  
             out[in] <= 1'b1; 
         end 
-        else begin
-            out <= 0; 
-        end
     end 
 
 endmodule  

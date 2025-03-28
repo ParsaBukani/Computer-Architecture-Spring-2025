@@ -58,16 +58,16 @@ module maze_controller (
 
     always @(ps, start, run, invalid, empty, co, found, finished_reading, D_out) begin        
         case (ps)
-            S0: ns = start ? S1 : S0;
-            S1: ns = start ? S1 : S2;
-            S2: ns = S3;
-            S3: ns = S4;
-            S4: ns = S5;
-            S5: ns = S6;
-            S6: ns = (~invalid & ~D_out) ? S7 : S8;
-            S7: ns = found ? S14 : S2;
-            S8: ns = empty ? S9 : S10;
-            S9: ns = S0;
+            S0:  ns = start ? S1 : S0;
+            S1:  ns = start ? S1 : S2;
+            S2:  ns = S3;
+            S3:  ns = S4;
+            S4:  ns = S5;
+            S5:  ns = S6;
+            S6:  ns = (~invalid & ~D_out) ? S7 : S8;
+            S7:  ns = found ? S14 : S2;
+            S8:  ns = empty ? S9 : S10;
+            S9:  ns = S0;
             S10: ns = S11;
             S11: ns = S12;
             S12: ns = co ? S8 : S13;
@@ -85,16 +85,16 @@ module maze_controller (
         load_count, count_en, go_back, read_checkList, RD, WR, D_in, Fail, Done} = 18'd0;
 
         case (ps)
-            S0: ;
-            S1: {init_x, init_y, init_stack, init_checkList} = 4'b1111;
-            S2: {init_count} = 1'b1;
-            S3: {WR, D_in} = 2'b11;
-            S4: {push, update_state} = 2'b11;
-            S5: {RD} = 1'b1;
-            S6: ;
-            S7: ;
-            S8: ;
-            S9: {Fail} = 1'b1;
+            S0:  ;
+            S1:  {init_x, init_y, init_stack, init_checkList} = 4'b1111;
+            S2:  {init_count} = 1'b1;
+            S3:  {WR, D_in} = 2'b11;
+            S4:  {push, update_state} = 2'b11;
+            S5:  {RD} = 1'b1;
+            S6:  ;
+            S7:  ;
+            S8:  ;
+            S9:  {Fail} = 1'b1;
             S10: {pop} = 1'b1;
             S11: {load_count, go_back} = 2'b11;
             S12: {go_back, update_state} = 2'b11;
