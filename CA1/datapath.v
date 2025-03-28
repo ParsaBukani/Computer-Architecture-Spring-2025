@@ -18,9 +18,9 @@ module maze_datapath (
     output co,
     output found,
     output finished_reading,
+    output [1:0] Move,
     output [3:0] X,
-    output [3:0] Y,
-    output [1:0] Move
+    output [3:0] Y
 );
     wire [3:0] x_coordinate, y_coordinate;
     wire X_en, Y_en;
@@ -71,6 +71,30 @@ module maze_datapath (
         .co(co)
     );
 
+    Stack stack (
+        .clk(clk),
+        .rst(rst),
+        .push(push),
+        .pop(pop),
+        .init(init_stack),
+        .data_in(cnt_direction),
+        .data_out(stack_data_out),
+        .full(),
+        .empty(empty)
+    );
+
+    Stack checkList (
+        .clk(clk),
+        .rst(rst),
+        .push(checkList_push),
+        .pop(read_checkList),
+        .init(init_checkList),
+        .data_in(stack_data_out),
+        .data_out(Move),
+        .full(),
+        .empty(finished_reading)
+    );
+
     assign direction = go_back ? ~stack_data_out : cnt_direction; // is might be better to use a register instead
 
     assign count_up = ~direction[1];
@@ -84,9 +108,5 @@ module maze_datapath (
     assign X = x_coordinate;
     assign Y = y_coordinate;
 
-
-    //...
-
-
-
 endmodule
+

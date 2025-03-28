@@ -2,7 +2,8 @@ module memory_block #(
     parameter WIDTH = 16,
     parameter HEIGHT = 16,
     parameter ADDR_W = 4,
-    parameter ADDR_H = 4
+    parameter ADDR_H = 4,
+    parameter FILE_PATH = "map.txt"
 ) (
     input wire clk,
     input wire wr,
@@ -14,15 +15,19 @@ module memory_block #(
 );
     reg [0:0] mem [0:WIDTH-1][0:HEIGHT-1];
 
+    initial begin
+        $readmemb(FILE_PATH, mem);
+    end
+
     always @(*) begin
         if (rd) begin
-            data_out <= mem[addr_x][addr_y];
+            data_out = mem[addr_x][addr_y];
         end
     end
 
     always @(posedge clk) begin 
         if (wr) begin
-            mem[addr_x][addr_y] = data_in;
+            mem[addr_x][addr_y] <= data_in;
         end
     end
 
