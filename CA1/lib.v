@@ -39,7 +39,7 @@ module counter #(
     input wire init,
     input wire [(m - 1):0] pin,
     output reg [(m - 1):0] cntout,
-    output co,
+    output co
 );
     always @(posedge clk or posedge rst) begin
         if (rst)
@@ -58,9 +58,8 @@ module counter #(
     end
 
     assign co = &{cntout};
-  
+    
 endmodule
-
 
 module up_down_counter #(
     parameter m = 8
@@ -74,8 +73,8 @@ module up_down_counter #(
     input wire count_down,
     input wire [(m - 1):0] pin,
     output reg [(m - 1):0] cntout,
-    output overflow,
-    output underflow,
+    output reg overflow,
+    output reg underflow
 );
     always @(posedge clk or posedge rst) begin
         if (rst)
@@ -138,9 +137,9 @@ module decoder #(
     output reg [(2**WIDTH)-1:0] out  
 );  
     always @(*) begin   
-        out = 0; 
+        out <= 0; 
         if (en) begin  
-            out[in] = 1'b1; 
+            out[in] <= 1'b1; 
         end 
     end 
 
@@ -151,17 +150,15 @@ module mux #(
     parameter WIDTH = 4,
     parameter DATA_WIDTH = 2
 ) (
-    input wire [DATA_WIDTH-1:0] data [(2**WIDTH)-1:0],
+    input wire [((DATA_WIDTH)*(2**WIDTH))-1:0] data,
     input wire [WIDTH-1:0] sel, 
     input wire en,   
     output reg [DATA_WIDTH-1:0] out 
 );
     always @(*) begin
-        out = {DATA_WIDTH{1'b0}};
+        out <= {DATA_WIDTH{1'b0}};
         if (en) begin
-            out = data[sel]; 
+            out <= data[sel]; 
         end
     end
-
 endmodule
-
