@@ -178,13 +178,13 @@ module Stack (
         .rst(rst),
         .ld(1'b0),
         .init(init),
-        .encnt(push | pop),
+        .encnt(1'b1),
         .pin(8'b0),
         .cntout(cntout),
         .count_up(push & ~full), 
         .count_down(pop & ~empty), 
         .overflow(full),
-        .underflow(empty)
+        .underflow()
     );
 
     reg [1:0] mem [0:255];
@@ -197,6 +197,8 @@ module Stack (
             data_out <= mem[cntout - 1];
         end
     end
+
+    assign empty = (cntout == 0);
 
 endmodule
 

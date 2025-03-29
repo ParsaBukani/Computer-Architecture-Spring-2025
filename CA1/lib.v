@@ -13,7 +13,9 @@ module memory_block #(
     input wire data_in,
     output reg data_out
 );
-    reg [0:0] mem [0:WIDTH-1][0:HEIGHT-1];
+    // reg [0:0] mem [0:WIDTH-1][0:HEIGHT-1];
+    reg [0:WIDTH - 1] mem [0:HEIGHT - 1];
+
 
     initial begin
         $readmemb(FILE_PATH, mem);
@@ -21,13 +23,15 @@ module memory_block #(
 
     always @(*) begin
         if (rd) begin
-            data_out = mem[addr_x][addr_y];
+            data_out = mem[addr_y][addr_x];
+            // data_out = mem[addr_x][addr_y];
         end
     end
 
     always @(posedge clk) begin 
         if (wr) begin
-            mem[addr_x][addr_y] <= data_in;
+            mem[addr_y][addr_x] <= data_in;
+            // mem[addr_x][addr_y] <= data_in;
         end
     end
 
@@ -49,22 +53,62 @@ module counter #(
     always @(posedge clk or posedge rst) begin
         if (rst)
             cntout <= {m{1'b0}};
+        else if (ld) begin
+            cntout <= pin;
+        end
+        else if (init) begin
+            cntout <= {m{1'b0}};
+        end
         else if (encnt) begin
-            if (ld) begin
-                cntout <= pin;
-            end
-            else if (init) begin
-                cntout <= {m{1'b0}};
-            end
-            else begin
-                cntout <= cntout + 1;
-            end
+            cntout <= cntout + 1;
         end
     end
 
     assign co = &{cntout};
     
 endmodule
+
+// module up_down_counter #(
+//     parameter m = 8
+// ) (
+//     input wire clk,
+//     input wire rst,
+//     input wire ld,
+//     input wire encnt,
+//     input wire init,
+//     input wire count_up,
+//     input wire count_down,
+//     input wire [(m - 1):0] pin,
+//     output reg [(m - 1):0] cntout,
+//     output wire overflow,
+//     output wire underflow
+// );
+//     always @(posedge clk or posedge rst) begin
+//         if (rst)
+//             cntout <= {m{1'b0}};
+//         else if (encnt) begin
+//             if (ld) begin
+//                 cntout <= pin;
+//             end
+//             else if (init) begin
+//                 cntout <= {m{1'b0}};
+//             end
+//             else begin
+//                 if (count_up) begin
+//                     cntout <= cntout + 1;
+//                 end
+//                 if (count_down) begin
+//                     cntout <= cntout - 1;
+//                 end   
+//             end
+//         end
+//     end
+
+//     assign overflow = &{cntout};
+//     assign underflow = ~|{cntout + 1};
+
+// endmodule
+
 
 module up_down_counter #(
     parameter m = 8
@@ -81,31 +125,53 @@ module up_down_counter #(
     output wire overflow,
     output wire underflow
 );
+    reg overflow_detect;
+    reg underflow_detect;
+
     always @(posedge clk or posedge rst) begin
-        if (rst)
+        if (rst) begin
             cntout <= {m{1'b0}};
+            overflow_detect <= 1'b0;
+            underflow_detect <= 1'b0;
+        end 
         else if (encnt) begin
             if (ld) begin
                 cntout <= pin;
-            end
+                overflow_detect <= 1'b0;
+                underflow_detect <= 1'b0;
+            end 
             else if (init) begin
                 cntout <= {m{1'b0}};
-            end
+                overflow_detect <= 1'b0;
+                underflow_detect <= 1'b0;
+            end 
             else begin
-                if (count_up) begin
-                    cntout <= cntout + 1;
+                if (count_up && ~overflow_detect) begin
+                    if (cntout == {m{1'b1}})
+                        overflow_detect <= 1'b1;
+                    else begin
+                        cntout <= cntout + 1;
+                        underflow_detect <= 1'b0;
+                    end
+                end 
+
+                if (count_down && ~underflow_detect) begin
+                    if (cntout == {m{1'b0}})
+                        underflow_detect <= 1'b1;
+                    else begin
+                        cntout <= cntout - 1;
+                        overflow_detect <= 1'b0;
+                    end
                 end
-                if (count_down) begin
-                    cntout <= cntout - 1;
-                end   
             end
         end
     end
 
-    assign overflow = &{cntout};
-    assign underflow = ~|{cntout};
+    assign overflow = overflow_detect;
+    assign underflow = underflow_detect;
 
 endmodule
+
 
 
 module register #(
