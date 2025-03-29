@@ -111,13 +111,28 @@ module system_tb;
         #20 start = 0;
     end
 
+    // always @(posedge Done or posedge Fail) begin
+    //     if (Fail)
+    //         $display("Test failed: No solution found.");
+    //     else begin
+    //         $display("Test passed: Maze solved successfully.");
+    //         #20 run <= 1;
+    //         #20 run <= 0;
+    //     end
+    //     #1000 $stop;
+    // end
+
     always @(posedge Done or posedge Fail) begin
-        if (Fail)
+        if (Fail) begin
             $display("Test failed: No solution found.");
-        else begin
+        end else begin
             $display("Test passed: Maze solved successfully.");
             #20 run <= 1;
             #20 run <= 0;
+            repeat (50) begin
+                @(posedge clk);
+                $display("Move: %b", Move);
+            end
         end
         #1000 $stop;
     end
