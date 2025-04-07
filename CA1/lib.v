@@ -55,7 +55,7 @@ module counter #(
         else if (init) begin
             cntout <= {m{1'b0}};
         end
-        else if (encnt) begin               //change
+        else if (encnt) begin
             cntout <= cntout + 1;
         end
     end
@@ -65,7 +65,7 @@ module counter #(
 endmodule
 
 
-module up_down_counter #( //change
+module up_down_counter #(
     parameter m = 8
 ) (
     input wire clk,
