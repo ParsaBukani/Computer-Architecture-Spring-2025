@@ -9,8 +9,8 @@ module system (
     output [1:0] Move
 );
     wire init_x, init_y, init_stack, init_checkList, init_count;
-    wire push, checkList_push, pop, update_state;
-    wire load_count, count_en, go_back, read_checkList;
+    wire push, write_checkList, pop, update_state;
+    wire load_count, count_en, go_back, read_checkList, checkList_direction, read_moves;
     wire RD, WR, D_in, D_out;
     wire invalid, empty, co, found, finished_reading;
     wire [3:0] X, Y;
@@ -24,13 +24,15 @@ module system (
         .init_checkList(init_checkList),
         .init_count(init_count),
         .push(push),
-        .checkList_push(checkList_push),
+        .write_checkList(write_checkList),
         .pop(pop),
         .update_state(update_state),
         .load_count(load_count),
         .count_en(count_en),
         .go_back(go_back),
         .read_checkList(read_checkList),
+        .checkList_direction(checkList_direction),
+        .read_moves(read_moves),
         .invalid(invalid),
         .empty(empty),
         .co(co),
@@ -58,18 +60,20 @@ module system (
         .init_checkList(init_checkList),
         .init_count(init_count),
         .push(push),
-        .checkList_push(checkList_push),
+        .write_checkList(write_checkList),
         .pop(pop),
         .update_state(update_state),
         .load_count(load_count),
         .count_en(count_en),
         .go_back(go_back),
         .read_checkList(read_checkList),
+        .checkList_direction(checkList_direction),
         .RD(RD),
         .WR(WR),
         .D_in(D_in),
         .Fail(Fail),
-        .Done(Done)
+        .Done(Done),
+        .read_moves(read_moves)
     );
 
     memory_block #(

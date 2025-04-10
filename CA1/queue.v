@@ -9,12 +9,11 @@ module Queue_dp #(
     input wire pop_en,
     input wire [WIDTH-1:0] data_in,
     output reg [WIDTH-1:0] data_out,
-    output wire [LENGTH-1:0] cntout_push,
-    output wire [LENGTH-1:0] cntout_pop,
     output reg full,
     output reg cnt_zero,
     output reg empty
 );
+    wire [LENGTH-1:0] cntout_push, cntout_pop;
     reg [WIDTH-1:0] mem [0:(2**LENGTH)-1];
 
     counter #(LENGTH) cnt_push (
@@ -45,7 +44,7 @@ module Queue_dp #(
         end
         if (pop_en) begin
             data_out <= mem[cntout_pop];
-        end
+        end 
     end
 
     always @(*) begin
@@ -101,7 +100,6 @@ module Queue_ctl
             reset_state: begin
                 cnt_init = 1;
             end
-
         endcase
     end
 endmodule
@@ -120,20 +118,17 @@ module Queue #(
     output wire full,
     output wire empty
 );
-    wire [LENGTH-1:0] cntout_push, cntout_pop;
     wire push_en, pop_en, cnt_init, overflow, underflow, cnt_zero;
 
     Queue_dp #(.LENGTH(LENGTH), .WIDTH(WIDTH)) datapath (
         .clk(clk),
         .rst(rst),
-        .init(cnt_init),
+        .init(cnt_init || init),
         .cnt_zero(cnt_zero),
         .push_en(push_en),
         .pop_en(pop_en),
         .data_in(data_in),
         .data_out(data_out),
-        .cntout_push(cntout_push),
-        .cntout_pop(cntout_pop),
         .full(overflow),
         .empty(underflow)
     );
@@ -147,7 +142,7 @@ module Queue #(
         .empty(underflow),
         .push_en(push_en),
         .pop_en(pop_en),
-        .cnt_init(init),
+        .cnt_init(cnt_init),
         .cnt_zero(cnt_zero)
     );
 

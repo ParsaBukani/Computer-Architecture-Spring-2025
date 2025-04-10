@@ -3,7 +3,7 @@ module memory_block #(
     parameter HEIGHT = 16,
     parameter ADDR_W = 4,
     parameter ADDR_H = 4,
-    parameter FILE_PATH = "map.txt" //change
+    parameter FILE_PATH = "map.txt"
 ) (
     input wire clk,
     input wire wr,

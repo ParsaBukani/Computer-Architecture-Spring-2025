@@ -7,12 +7,14 @@ module maze_datapath (
     input init_stack,
     input init_checkList,
     input init_count,
-    input push, checkList_push,
+    input push, write_checkList,
     input pop,
     input update_state,
     input load_count, count_en,
     input go_back,
     input read_checkList,
+    input checkList_direction,
+    input read_moves,
     output invalid,
     output empty,
     output co,
@@ -29,6 +31,8 @@ module maze_datapath (
 
     wire [1:0] cnt_direction;
     wire [1:0] stack_data_out;
+    wire [1:0] queue_data_out;
+    wire [1:0] stack_data_in;
 
     wire [1:0] direction;
 
@@ -77,25 +81,26 @@ module maze_datapath (
         .push(push),
         .pop(pop),
         .init(init_stack),
-        .data_in(cnt_direction),
+        .data_in(stack_data_in),
         .data_out(stack_data_out),
         .full(),
         .empty(empty)
     );
 
-    Stack checkList (
+    Queue checkList (
         .clk(clk),
         .rst(rst),
-        .push(checkList_push),
+        .push(write_checkList),
         .pop(read_checkList),
         .init(init_checkList),
         .data_in(stack_data_out),
-        .data_out(Move),
+        .data_out(queue_data_out),
         .full(),
         .empty(finished_reading)
     );
 
-    assign direction = go_back ? ~stack_data_out : cnt_direction; // is might be better to use a register instead
+    assign direction = go_back ? ~stack_data_out : cnt_direction;
+    assign stack_data_in = checkList_direction ? queue_data_out : cnt_direction;
 
     assign count_up = ~direction[1];
     assign count_down = direction[1];
@@ -108,5 +113,6 @@ module maze_datapath (
     assign X = x_coordinate;
     assign Y = y_coordinate;
 
-endmodule
+    assign Move = read_moves ? queue_data_out : 2'bxx;
 
+endmodule
