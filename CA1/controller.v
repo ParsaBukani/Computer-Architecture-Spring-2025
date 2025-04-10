@@ -62,7 +62,7 @@ module maze_controller (
             S1:  ns = start ? S1 : S2;
             S2:  ns = S3;
             S3:  ns = S4;
-            S4:  ns = invalid ? S8 : S5; //change
+            S4:  ns = invalid ? S8 : S5; 
             S5:  ns = S6;
             S6:  ns = ~D_out ? S7 : S8;
             S7:  ns = found ? S14 : S2;
@@ -71,7 +71,7 @@ module maze_controller (
             S10: ns = S11;
             S11: ns = S12;
             S12: ns = co ? S8 : S13;
-            S13: ns = S4; //change (it is better)
+            S13: ns = S4; 
             S14: ns = S15;
             S15: ns = empty ? S16 : S14;
             S16: ns = run ? S17 : S16;
@@ -96,7 +96,7 @@ module maze_controller (
             S8:  ;
             S9:  {Fail} = 1'b1;
             S10: {pop} = 1'b1;
-            S11: {load_count, go_back} = 2'b11;
+            S11: {load_count} = 1'b1;
             S12: {go_back, update_state} = 2'b11;
             S13: {count_en} = 1'b1;
             S14: {pop} = 1'b1;

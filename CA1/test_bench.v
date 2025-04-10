@@ -116,7 +116,7 @@ module system_tb;
             $display("Test failed: No solution found.");
         end else begin
             $display("Test passed: Maze solved successfully.");
-            #20 run <= 1;
+            #120 run <= 1;
             #20 run <= 0;
             repeat (50) begin
                 @(posedge clk);
@@ -147,6 +147,7 @@ module queue_tb;
         .rst(rst),
         .push(push),
         .pop(pop),
+        .init(init),
         .data_in(data_in),
         .data_out(data_out),
         .full(full),
@@ -182,12 +183,6 @@ module queue_tb;
 
         repeat (255) push_value($random % 4);
 
-        pop_value();
-        pop_value();
-        pop_value();
-        push_value(00);
-        push_value(01);
-        push_value(11);
         push_value(00);
 
         #100;

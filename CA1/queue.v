@@ -114,18 +114,19 @@ module Queue #(
     input wire rst,
     input wire push,
     input wire pop,
+    input wire init,
     input wire [WIDTH-1:0] data_in,
     output wire [WIDTH-1:0] data_out,
     output wire full,
     output wire empty
 );
     wire [LENGTH-1:0] cntout_push, cntout_pop;
-    wire push_en, pop_en, init, overflow, underflow, cnt_zero;
+    wire push_en, pop_en, cnt_init, overflow, underflow, cnt_zero;
 
     Queue_dp #(.LENGTH(LENGTH), .WIDTH(WIDTH)) datapath (
         .clk(clk),
         .rst(rst),
-        .init(init),
+        .init(cnt_init),
         .cnt_zero(cnt_zero),
         .push_en(push_en),
         .pop_en(pop_en),
