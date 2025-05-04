@@ -5,13 +5,11 @@ module risc_V_controlUnit(
     input rst,
     input Zero,
     input wire [6:0] opcode,
-    input wire [2:0] func_3,
-    input wire [6:0] func_7,
     output reg [2:0] ImmSrc,
     output reg [1:0] ResultSrc,
     output reg [1:0] AluOp,
+    output reg [1:0] PcSrc,
     output reg AluSrc,
-    output reg PcSrc,
     output reg MemWrite,
     output reg RegWrite
 );
@@ -32,41 +30,85 @@ module risc_V_controlUnit(
     always @(*) begin       
         case (opcode)
             0110011: // R_Type
-            begin
-                
-            end
-            0010011: // I_Type (Alu)
-            begin
-                
-            end
+                begin
+                    RegWrite = 1;
+                    MemWrite = 0;
+                    PcSrc = 2'b00;
+                    AluSrc = 0;
+                    AluOp = 2'b10;
+                    ResultSrc = 2'b00;
+                    ImmSrc = 3'bxxx;
+                end
             0000011: // I_Type (Load)
-            begin
-                
-            end
-            0100011: // S_Type
-            begin
-                
-            end
-            1100011: // B_Type
-            begin
-                
-            end
-            0110111: // U_Type (LUI)
-            begin
-                
-            end
-            0010111: // U_Type (AUIPC)
-            begin
-                
-            end
-            1101111: // J_Type
-            begin
-                
-            end
+                begin
+                    RegWrite = 1;
+                    MemWrite = 0;
+                    PcSrc = 2'b00;
+                    AluSrc = 1;
+                    AluOp = 2'b00;
+                    ResultSrc = 2'b01;
+                    ImmSrc = 3'b000;
+                end
+            0010011: // I_Type (Alu)
+                begin
+                    RegWrite = 1;
+                    MemWrite = 0;
+                    PcSrc = 2'b00;
+                    AluSrc = 1;
+                    AluOp = 2'b10;
+                    ResultSrc = 2'b00;
+                    ImmSrc = 3'b000;
+                end
             1100111: // I_Type (JALR)
-            begin
-                
-            end
+                begin
+                    RegWrite = 1;
+                    MemWrite = 0;
+                    PcSrc = 2'b10;
+                    AluSrc = 1;
+                    AluOp = 2'b00;
+                    ResultSrc = 2'b10;
+                    ImmSrc = 3'b000;
+                end
+            0100011: // S_Type
+                begin
+                    RegWrite = 0;
+                    MemWrite = 1;
+                    PcSrc = 2'b00;
+                    AluSrc = 1;
+                    AluOp = 2'b00;
+                    ResultSrc = 2'bxx;
+                    ImmSrc = 3'b001;
+                end
+            1100011: // B_Type
+                begin
+                    RegWrite = 0;
+                    MemWrite = 0;
+                    PcSrc = (Zero == 1) ? 2'b01 : 2'b00;
+                    AluSrc = 1'bx;
+                    AluOp = 2'b01;
+                    ResultSrc = 2'bxx;
+                    ImmSrc = 3'b010;
+                end
+            0110111: // U_Type (LUI)
+                begin
+                    RegWrite = 1;
+                    MemWrite = 0;
+                    PcSrc = 2'b00;
+                    AluSrc = 1'bx;
+                    AluOp = 2'bxx;
+                    ResultSrc = 2'b11;
+                    ImmSrc = 3'b011;
+                end
+            1101111: // J_Type
+                begin
+                    RegWrite = 1;
+                    MemWrite = 0;
+                    PcSrc = 2'b01;
+                    AluSrc = 1'bx;
+                    AluOp = 2'bxx;
+                    ResultSrc = 2'b10;
+                    ImmSrc = 3'b100;
+                end
         endcase
     end
     
