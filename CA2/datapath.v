@@ -9,7 +9,7 @@ module datapath (
     input wire ALUSrc,
     input wire [2:0] ImmSrc,
     input wire RegWrite,
-    output wire op,
+    output wire opcode,
     output wire [2:0] func3,
     output wire [6:0] func7,
     output wire zero
@@ -34,7 +34,7 @@ module datapath (
         .readData(instruction)
     );
 
-    assign op    = instruction[6:0];
+    assign opcode    = instruction[6:0];
     assign func3 = instruction[14:12];
     assign func7 = instruction[31:25];
     assign rs1   = instruction[19:15];
