@@ -1,3 +1,5 @@
+`timescale 1ns/1ns
+
 module instructionMemory #(
     parameter ADDR_WIDTH     = 32,
     parameter MEM_ADDR_BITS  = 6

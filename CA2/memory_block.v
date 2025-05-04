@@ -1,3 +1,5 @@
+`timescale 1ns/1ns
+
 module risc_v_memory #(
     parameter DATA_WIDTH = 32,
     parameter ADDR_WIDTH = 5,
