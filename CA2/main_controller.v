@@ -1,7 +1,6 @@
 `timescale 1ns/1ns
 
 module main_controller(
-    input wire clk, rst,
     input wire zero,
     input wire [6:0] opcode,
     input wire [2:0] funct3,
@@ -18,8 +17,6 @@ module main_controller(
     wire [1:0] AluOp;
 
     risc_V_controlUnit CU (
-        .clk(clk),
-        .rst(rst),
         .zero(zero),
         .opcode(opcode),
         .funct3(funct3),    

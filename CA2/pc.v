@@ -9,11 +9,11 @@ module risc_v_pc #(
     output reg [ADDR_WIDTH-1:0] pc      
 );
 
-    always @(posedge clk) begin
+    always @(posedge clk, posedge reset) begin
         if (reset)
-            pc <= {ADDR_WIDTH{1'b0}};   
+            pc <= {ADDR_WIDTH{1'b0}};
         else
-            pc <= next_pc;             
+            pc <= next_pc;
     end
 
 endmodule

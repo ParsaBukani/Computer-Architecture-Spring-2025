@@ -1,7 +1,6 @@
 `timescale 1ns/1ns
 
 module risc_V_controlUnit(
-    input clk, rst,
     input wire zero,
     input wire [6:0] opcode,
     input wire [2:0] funct3,
@@ -14,9 +13,9 @@ module risc_V_controlUnit(
     output reg RegWrite
 );
 
-    always @(*) begin       
+    always @(*) begin
         case (opcode)
-            0110011: // R_Type
+            7'b0110011: // R_Type
                 begin
                     RegWrite = 1;
                     MemWrite = 0;
@@ -27,7 +26,7 @@ module risc_V_controlUnit(
                     ImmSrc = 3'bxxx;
                 end
 
-            0000011: // I_Type (Load)
+            7'b0000011: // I_Type (Load)
                 begin
                     RegWrite = 1;
                     MemWrite = 0;
@@ -38,7 +37,7 @@ module risc_V_controlUnit(
                     ImmSrc = 3'b000;
                 end
 
-            0010011: // I_Type (Alu)
+            7'b0010011: // I_Type (Alu)
                 begin
                     RegWrite = 1;
                     MemWrite = 0;
@@ -49,7 +48,7 @@ module risc_V_controlUnit(
                     ImmSrc = 3'b000;
                 end
 
-            1100111: // I_Type (Jalr)
+            7'b1100111: // I_Type (Jalr)
                 begin
                     RegWrite = 1;
                     MemWrite = 0;
@@ -60,7 +59,7 @@ module risc_V_controlUnit(
                     ImmSrc = 3'b000;
                 end
 
-            0100011: // S_Type
+            7'b0100011: // S_Type
                 begin
                     RegWrite = 0;
                     MemWrite = 1;
@@ -71,7 +70,7 @@ module risc_V_controlUnit(
                     ImmSrc = 3'b001;
                 end
             
-            1100011: // B-Type
+            7'b1100011: // B-Type
                 begin 
                     RegWrite = 0;
                     MemWrite = 0;
@@ -87,7 +86,7 @@ module risc_V_controlUnit(
                     endcase
                 end
 
-            0110111: // U_Type (Lui)
+            7'b0110111: // U_Type (Lui)
                 begin
                     RegWrite = 1;
                     MemWrite = 0;
@@ -98,7 +97,7 @@ module risc_V_controlUnit(
                     ImmSrc = 3'b011;
                 end
 
-            1101111: // J_Type
+            7'b1101111: // J_Type
                 begin
                     RegWrite = 1;
                     MemWrite = 0;

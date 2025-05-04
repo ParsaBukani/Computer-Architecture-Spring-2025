@@ -35,8 +35,6 @@ module riscv (
     );
 
     main_controller controller_inst (
-        .clk(clk),
-        .rst(rst),
         .zero(zero),
         .opcode(opcode),
         .funct3(func3),

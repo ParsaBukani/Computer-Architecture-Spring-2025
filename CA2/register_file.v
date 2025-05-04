@@ -5,6 +5,7 @@ module risc_v_regfile # (
     parameter ADDR_WIDTH = 5
 ) (
     input clk,
+    input rst,
     input wire reg_write,                     
     input wire [ADDR_WIDTH-1:0] read_addr1,   
     input wire [ADDR_WIDTH-1:0] read_addr2,   
@@ -16,13 +17,13 @@ module risc_v_regfile # (
 
     reg [DATA_WIDTH-1:0] registers [0:31];
 
-    initial begin
-        registers[0] = 32'b0;
-    end
 
-    always @(posedge clk) begin
+    always @(posedge clk, posedge rst) begin
+        if (rst) begin
+            registers[0] = 32'b0;
+        end
         if (reg_write && write_addr != 5'b0) begin
-            registers[write_addr] <= write_data;
+            registers[write_addr] = write_data;
         end
 
         read_data1 <= registers[read_addr1];

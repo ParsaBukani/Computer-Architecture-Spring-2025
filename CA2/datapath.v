@@ -1,7 +1,8 @@
 `timescale 1ns/1ns
 
 module datapath (
-    input clk, rst, 
+    input clk,
+    input rst, 
     input wire [1:0] PCSrc,
     input wire [1:0] ResultSrc,
     input wire MemWrite,
@@ -43,6 +44,7 @@ module datapath (
 
     risc_v_regfile regfile (
         .clk(clk),
+        .rst(rst),
         .reg_write(RegWrite),
         .read_addr1(rs1),
         .read_addr2(rs2),

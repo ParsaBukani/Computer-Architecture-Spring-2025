@@ -17,9 +17,9 @@ module riscv_testbench;
         // $dumpfile("riscv_test.vcd"); 
         // $dumpvars(0, riscv_testbench);
 
-        clk = 0;
+        clk = 1;
         rst = 1;
-        #10;
+        #6;
         rst = 0;
 
         #100;
