@@ -1,3 +1,5 @@
+`timescale 1ns/1ns
+
 module risc_v_pc #(
     parameter ADDR_WIDTH = 32
 ) (
