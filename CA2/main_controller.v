@@ -33,7 +33,7 @@ module main_controller(
     );
 
     alu_control ALU_CU (
-        .AluOp(AluOp),
+        .ALUOp(AluOp),
         .funct3(funct3),
         .funct7(funct7),
         .ALUControl(ALUControl)

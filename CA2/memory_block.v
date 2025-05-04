@@ -18,8 +18,10 @@ module risc_v_memory #(
        if (mem_write) begin
             mem[addr] <= data_in;
         end
+
+        data_out <= mem[addr];
+
     end
 
-    data_out = mem[addr];
 
 endmodule

@@ -13,7 +13,8 @@ module instructionMemory #(
     reg [31:0] RAM[0:MEM_DEPTH-1];
 
     initial begin
-        $readmemh("instruction_memory_testbench.dat", RAM);
+        $readmemh("test.mem", RAM);
+        // $readmemh("instruction_memory_testbench.dat", RAM);
     end
 
     assign readData = RAM[address[MEM_ADDR_BITS+1:2]];

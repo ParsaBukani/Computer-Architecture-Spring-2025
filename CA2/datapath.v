@@ -9,7 +9,7 @@ module datapath (
     input wire ALUSrc,
     input wire [2:0] ImmSrc,
     input wire RegWrite,
-    output wire opcode,
+    output wire [6:0] opcode,
     output wire [2:0] func3,
     output wire [6:0] func7,
     output wire zero

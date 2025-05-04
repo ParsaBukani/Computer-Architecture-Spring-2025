@@ -1,10 +1,10 @@
 `timescale 1ns/1ns
 
-module risc_v_regfile #(
+module risc_v_regfile # (
     parameter DATA_WIDTH = 32,
-    parameter ADDR_WIDTH = 5,
+    parameter ADDR_WIDTH = 5
 ) (
-    input wire clk,
+    input clk,
     input wire reg_write,                     
     input wire [ADDR_WIDTH-1:0] read_addr1,   
     input wire [ADDR_WIDTH-1:0] read_addr2,   
@@ -24,9 +24,10 @@ module risc_v_regfile #(
         if (reg_write && write_addr != 5'b0) begin
             registers[write_addr] <= write_data;
         end
-    end
 
-    read_data1 = registers[read_addr1];
-    read_data2 = registers[read_addr2];
+        read_data1 <= registers[read_addr1];
+        read_data2 <= registers[read_addr2];
+
+    end
 
 endmodule

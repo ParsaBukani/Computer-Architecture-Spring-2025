@@ -28,7 +28,7 @@ module riscv (
         .ALUSrc(ALUSrc),
         .ImmSrc(ImmSrc),
         .RegWrite(RegWrite),
-        .op(opcode),
+        .opcode(opcode),
         .func3(func3),
         .func7(func7),
         .zero(zero)
