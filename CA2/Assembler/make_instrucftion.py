@@ -1,3 +1,4 @@
+'------------------------------------------------------Instructions---------------------------------------------------'
 "add x_i, x_j, x_k"
 "sub x_i, x_j, x_k"
 "and x_i, x_j, x_k"
@@ -12,9 +13,26 @@
 "bne x_i, x_j, label(Number)"
 "lui x_i, Number(20 bit)"
 
-"you can replace your assembly file name into this empty string"
+"you can replace your assembly file name into these empty strings"
 FileName = "test.txt"
-OutputFileName = "output.mem"
+OutputFileName = "test.mem"
+'--------------------------------------------------------------------------------------------------------------------'
+
+REGISTER_MAP = {
+    "zero": "x0",  "ra": "x1",   "sp": "x2",   "gp": "x3",
+    "tp": "x4",    "t0": "x5",   "t1": "x6",   "t2": "x7",
+    "s0": "x8",    "fp": "x8",   "s1": "x9",   "a0": "x10",
+    "a1": "x11",   "a2": "x12",  "a3": "x13",  "a4": "x14",
+    "a5": "x15",   "a6": "x16",  "a7": "x17",  "s2": "x18",
+    "s3": "x19",   "s4": "x20",  "s5": "x21",  "s6": "x22",
+    "s7": "x23",   "s8": "x24",  "s9": "x25",  "s10": "x26",
+    "s11": "x27",  "t3": "x28",  "t4": "x29",  "t5": "x30",
+    "t6": "x31"
+}
+
+def normalize_registers(assembly_parts):
+    return [REGISTER_MAP.get(part, part) for part in assembly_parts]
+
 
 def parse_file(filename):
     result = []
@@ -93,7 +111,7 @@ def functionType(func):
 
 def InstMaker(functionName="r_type"):
     def R_TypeInstMaker(func_type, rd, x1, x2, opcode):
-        inst = decimal_to_binary(5, rd[1]) + opcode
+        inst = decimal_to_binary(5, rd[1:]) + opcode
         if func_type.lower() == "add":
             inst = "000" + inst
         elif func_type.lower() == "sub":
@@ -106,7 +124,8 @@ def InstMaker(functionName="r_type"):
             inst = "010" + inst
         else :
             raise ValueError("can't make instruction")
-        inst = decimal_to_binary(5, x2[1]) + decimal_to_binary(5, x1[1]) + inst
+        
+        inst = decimal_to_binary(5, x2[1:]) + decimal_to_binary(5, x1[1:]) + inst
         if func_type.lower() == "add":
             inst = "0000000" + inst
         elif func_type.lower() == "sub":
@@ -119,10 +138,11 @@ def InstMaker(functionName="r_type"):
             inst = "0000000" + inst
         else :
             raise ValueError("can't make instruction")
+        
         return inst
 
     def I_TypeInstMaker(func_type, rd, rs, imm, opcode):
-        inst = decimal_to_binary(5, rd[1]) + opcode
+        inst = decimal_to_binary(5, rd[1:]) + opcode
         if func_type.lower() == "lw":
             inst = "010" + inst
         elif func_type.lower() == "addi":
@@ -135,8 +155,10 @@ def InstMaker(functionName="r_type"):
             inst = "000" + inst
         else :
             raise ValueError("can't make instruction")
-        inst = decimal_to_binary(5, rs[1]) + inst
+        
+        inst = decimal_to_binary(5, rs[1:]) + inst
         inst = decimal_to_binary(12, imm) + inst
+
         return inst
 
     def S_TypeInstMaker(func_type, x1, x2, imm, opcode):
@@ -146,9 +168,11 @@ def InstMaker(functionName="r_type"):
             inst = "010" + inst
         else:
             raise ValueError("can't make instruction")
-        inst = decimal_to_binary(5, x1[1]) + inst
-        inst = decimal_to_binary(5, x2[1]) + inst
+        
+        inst = decimal_to_binary(5, x1[1:]) + inst
+        inst = decimal_to_binary(5, x2[1:]) + inst
         inst = imm_bin[:-5] + inst
+
         return inst
 
     def B_TypeInstMaker(func_type, x1, x2, imm, opcode):
@@ -160,20 +184,25 @@ def InstMaker(functionName="r_type"):
             inst = "001" + inst
         else:
             raise ValueError("can't make instruction")
-        inst = decimal_to_binary(5, x1[1]) + inst
-        inst = decimal_to_binary(5, x2[1]) + inst
+        
+        inst = decimal_to_binary(5, x1[1:]) + inst
+        inst = decimal_to_binary(5, x2[1:]) + inst
         inst = imm_bin[0] + imm_bin[-11:-5] + inst
+
         return inst
 
     def J_TypeInstMaker(rd, imm, opcode):
         imm_bin = decimal_to_binary(20, imm)
         imm_bin = imm_bin[0] + imm_bin
-        inst = decimal_to_binary(5, rd[1]) + opcode
+        inst = decimal_to_binary(5, rd[1:]) + opcode
         inst = imm_bin[-20] + imm_bin[-11:-1] + imm_bin[-11] + imm_bin[-20:-12] + inst
 
+        return inst
+
     def U_TypeInstMaker(rd, imm, opcode):
-        inst = decimal_to_binary(5, rd[1]) + opcode
+        inst = decimal_to_binary(5, rd[1:]) + opcode
         inst = decimal_to_binary(20, imm) + inst
+        
         return inst
 
     functionOptions = {
@@ -196,6 +225,7 @@ def assemblerSim():
     parsed_lines = parse_file(FileName)
     insts = []
     for line in parsed_lines:
+        line = normalize_registers(line) 
         func = line[0]
         funcType = functionType(func)
         opcode = opcodeDecider(funcType)
@@ -239,3 +269,4 @@ with open(OutputFileName, 'w') as file:
             file.write(str(item) + '\n')
         else:
             file.write(str(item))
+
