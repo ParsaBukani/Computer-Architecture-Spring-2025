@@ -13,8 +13,8 @@
 "lui x_i, Number(20 bit)"
 
 "you can replace your assembly file name into this empty string"
-FileName = "test.txt"
-OutputFileName = "output.mem"
+FileName = "code.txt"
+OutputFileName = "test.mem"
 
 def parse_file(filename):
     result = []
@@ -41,7 +41,7 @@ def decimal_to_binary(n, num):
     if num_int >= 0:
         bits = bin(num_int)[2:]
     else:
-        bits = bin((1 << bits) + num_int)[2:]
+        bits = bin((1 << n) + num_int)[2:]
     return bits.zfill(n)
 
 def opcodeDecider(type):
@@ -162,7 +162,7 @@ def InstMaker(functionName="r_type"):
             raise ValueError("can't make instruction")
         inst = decimal_to_binary(5, x1[1]) + inst
         inst = decimal_to_binary(5, x2[1]) + inst
-        inst = imm_bin[0] + imm_bin[-11:-5] + inst
+        inst = imm_bin[-12] + imm_bin[-11:-5] + inst
         return inst
 
     def J_TypeInstMaker(rd, imm, opcode):
@@ -170,6 +170,7 @@ def InstMaker(functionName="r_type"):
         imm_bin = imm_bin[0] + imm_bin
         inst = decimal_to_binary(5, rd[1]) + opcode
         inst = imm_bin[-20] + imm_bin[-11:-1] + imm_bin[-11] + imm_bin[-20:-12] + inst
+        return inst
 
     def U_TypeInstMaker(rd, imm, opcode):
         inst = decimal_to_binary(5, rd[1]) + opcode
