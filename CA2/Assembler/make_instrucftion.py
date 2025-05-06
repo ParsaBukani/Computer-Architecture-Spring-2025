@@ -13,9 +13,26 @@
 "bne x_i, x_j, label(Number)"
 "lui x_i, Number(20 bit)"
 
-"you can replace your assembly file name into this empty string"
-FileName = "code.txt"
+"you can replace your assembly file name into these empty strings"
+FileName = "test.txt"
 OutputFileName = "test.mem"
+'--------------------------------------------------------------------------------------------------------------------'
+
+REGISTER_MAP = {
+    "zero": "x0",  "ra": "x1",   "sp": "x2",   "gp": "x3",
+    "tp": "x4",    "t0": "x5",   "t1": "x6",   "t2": "x7",
+    "s0": "x8",    "fp": "x8",   "s1": "x9",   "a0": "x10",
+    "a1": "x11",   "a2": "x12",  "a3": "x13",  "a4": "x14",
+    "a5": "x15",   "a6": "x16",  "a7": "x17",  "s2": "x18",
+    "s3": "x19",   "s4": "x20",  "s5": "x21",  "s6": "x22",
+    "s7": "x23",   "s8": "x24",  "s9": "x25",  "s10": "x26",
+    "s11": "x27",  "t3": "x28",  "t4": "x29",  "t5": "x30",
+    "t6": "x31"
+}
+
+def normalize_registers(assembly_parts):
+    return [REGISTER_MAP.get(part, part) for part in assembly_parts]
+
 
 def parse_file(filename):
     result = []
@@ -167,11 +184,9 @@ def InstMaker(functionName="r_type"):
             inst = "001" + inst
         else:
             raise ValueError("can't make instruction")
-        
-        inst = decimal_to_binary(5, x1[1:]) + inst
-        inst = decimal_to_binary(5, x2[1:]) + inst
-        inst = imm_bin[0] + imm_bin[-11:-5] + inst
-
+        inst = decimal_to_binary(5, x1[1]) + inst
+        inst = decimal_to_binary(5, x2[1]) + inst
+        inst = imm_bin[-12] + imm_bin[-11:-5] + inst
         return inst
 
     def J_TypeInstMaker(rd, imm, opcode):
@@ -179,8 +194,6 @@ def InstMaker(functionName="r_type"):
         imm_bin = imm_bin[0] + imm_bin
         inst = decimal_to_binary(5, rd[1:]) + opcode
         inst = imm_bin[-20] + imm_bin[-11:-1] + imm_bin[-11] + imm_bin[-20:-12] + inst
-        return inst
-
         return inst
 
     def U_TypeInstMaker(rd, imm, opcode):
