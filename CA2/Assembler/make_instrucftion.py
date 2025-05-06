@@ -14,7 +14,7 @@
 "lui x_i, Number(20 bit)"
 
 "you can replace your assembly file name into these empty strings"
-FileName = "test.txt"
+InputFileName = "test.txt"
 OutputFileName = "test.mem"
 '--------------------------------------------------------------------------------------------------------------------'
 
@@ -33,26 +33,29 @@ REGISTER_MAP = {
 def normalize_registers(assembly_parts):
     return [REGISTER_MAP.get(part, part) for part in assembly_parts]
 
+def parse_labels(filename):
+    label_addresses = {}
+    clean_lines = []
 
-def parse_file(filename):
-    result = []
     with open(filename, 'r') as file:
+        address = 0
         for line in file:
             line = line.strip()
             if not line:
                 continue
-
+            if ':' in line:
+                label = line.replace(':', '').strip()
+                label_addresses[label] = address
+                continue
             line = line.replace(',', '')
             line = line.replace('(', ' ')
             line = line.replace(')', ' ')
             parts = line.split()
-            result.append(parts)
+            clean_lines.append(parts)
+            address += 1  # count instruction addresses
 
-    return result
+    return label_addresses, clean_lines
 
-def binary_to_hex(binary_str):
-    num = int(binary_str, 2)
-    return hex(num)
 
 def decimal_to_binary(n, num):
     num_int = int(num)
@@ -217,17 +220,28 @@ def InstMaker(functionName="r_type"):
     if selectedFunction:
         return selectedFunction
 
-
 def assemblerSim():
-    parsed_lines = parse_file(FileName)
+    label_map, parsed_lines = parse_labels(InputFileName)
     insts = []
-    for line in parsed_lines:
+    
+    for pc, line in enumerate(parsed_lines):
+        line = normalize_registers(line)
         func = line[0]
         funcType = functionType(func)
         opcode = opcodeDecider(funcType)
         inst_maker = InstMaker(funcType)
         instruction = ""
-        
+
+        if funcType == "J_Type" and line[2] in label_map:
+            label_pc = label_map[line[2]]
+            offset = label_pc - pc
+            line[2] = str(offset << 2)
+
+        elif funcType == "B_Type" and line[3] in label_map:
+            label_pc = label_map[line[3]]
+            offset = label_pc - pc
+            line[3] = str(offset << 2)
+
         if funcType == "R_Type":
             rd, rs1, rs2 = line[1], line[2], line[3]
             instruction = inst_maker(func, rd, rs1, rs2, opcode)
@@ -255,7 +269,9 @@ def assemblerSim():
         else:
             instruction = None
         insts.append(instruction)
+    
     return insts
+
 
 insts = assemblerSim()
 hex_list = [format(int(b, 2), '08X') for b in insts]

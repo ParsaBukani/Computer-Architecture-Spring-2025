@@ -1,11 +1,6 @@
-lui   t0, 12
-addi  t1, t0, 4
-lw    t2, 0(t0)
-lw    t3, 0(t1)
-add   t4, t2, t3
-sub   t5, t3, t2
-addi  t6, t2, 5
-ori   t7, t3, 0x0F
-slti  t1, t2, 15
-or    t2, t6, t5
-lui   t3, 0x10010
+addi x1, x0, 5
+addi x2, x0, 10
+bne x1, x2, Skip
+addi x10, x0, 1
+Skip:
+addi x3, x0, 2
