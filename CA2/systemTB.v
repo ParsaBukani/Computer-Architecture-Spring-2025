@@ -14,12 +14,10 @@ module riscv_testbench;
 
     initial begin
         $display("Starting simulation...");
-        // $dumpfile("riscv_test.vcd"); 
-        // $dumpvars(0, riscv_testbench);
 
-        clk = 1;
+        clk = 0;
         rst = 1;
-        #6;
+        #2;
         rst = 0;
 
         #100;
