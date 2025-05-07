@@ -4,8 +4,9 @@ module controller (
     input clk, rst,
     input clkEn,
     input serIn,
-    input co1, co2, coD,
-    input wire [4:0] num_data,
+    input co1, co2,
+    input wire [4:0] data_num,
+    input wire [4:0] dataTrans_out,
     output reg cnt1, cnt2, cntD,
     output reg ldcntD,
     output reg sh_enD, sh_en,
@@ -30,18 +31,18 @@ module controller (
             ps <= ns;
     end
 
-    always @(ps, serIn, co1, co2, coD) begin        
+    always @(ps, serIn, co1, co2, dataTrans_out) begin        
         case (ps)
             S0:  ns = serIn ? S0 : S1;
             S1:  ns = co1 ? S2 : S1;
             S2:  ns = co2 ? S3 : S2;
-            S3:  ns = (num_data == 5'd1) ? S0 : S4;
-            S4:  ns = coD ? S0 : S4;
+            S3:  ns = (data_num == 5'd1) ? S0 : S4;
+            S4:  ns = (dataTrans_out == 5'd2) ? S0 : S4;
             default: ns = S0;
         endcase
     end
 
-    always @(ps, serIn, co1, co2, coD) begin  
+    always @(ps, serIn, co1, co2, dataTrans_out) begin  
         {cnt1, cnt2, cntD, ldcntD, sh_en, sh_enD, Done, SerOutValid, init_cnt1, init_cnt2} = 10'd0;
 
         case (ps)

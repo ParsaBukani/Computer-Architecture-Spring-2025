@@ -165,8 +165,8 @@ module DataPath(
 
     output wire co2,
     output wire co1,
-    output wire coD,
     output wire [4:0] data_num,
+    output wire [4:0] dataTrans_out,
     output wire p0,
     output wire p1,
     output wire p2,
@@ -177,13 +177,14 @@ module DataPath(
 
 wire [1:0] port_num;
 wire [4:0] num_data;
-wire [4:0] dataTrans_out;
+
 //unusable
 wire [2:0] DataNam_out;
 wire [1:0] PortNam_out;
 wire [4:0] DataNam_sh_out;
 wire [1:0] PortNam_sh_in;
 wire overflow, x_0, x_1, x_2, x_3;
+wire coD;
 
 assign data_num = num_data;
 

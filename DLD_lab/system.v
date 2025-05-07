@@ -11,8 +11,10 @@ module system (
 
     wire clkEn;
     wire cnt1, cnt2, cntD, ldcntD, sh_en, sh_enD, init_cnt1, init_cnt2;
-    wire co1, co2, coD;
+    wire co1, co2;
     wire [4:0] data_num;
+    wire [4:0] dataTrans_out;
+
 
     one_pulser u_one_pulser (
         .rst(rst),
@@ -28,10 +30,10 @@ module system (
         .serIn(ser_in),
         .co1(co1),
         .co2(co2),
-        .coD(coD),
         .cnt1(cnt1),
         .cnt2(cnt2),
         .cntD(cntD),
+        .dataTrans_out(dataTrans_out),
         .ldcntD(ldcntD),
         .sh_enD(sh_enD),
         .sh_en(sh_en),
@@ -57,7 +59,7 @@ module system (
         .ser_in(ser_in),
         .co2(co2),
         .co1(co1),
-        .coD(coD),
+        .dataTrans_out(dataTrans_out),
         .p0(p0),
         .p1(p1),
         .p2(p2),

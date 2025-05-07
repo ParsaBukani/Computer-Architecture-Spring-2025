@@ -15,7 +15,7 @@ module TopModule_tb;
     wire [6:0] SSD1, SSD2;
 
     // Instantiate the DUT (Device Under Test)
-    TopModule uut (
+    system uut (
         .clk(clk),
         .rst(rst),
         .clkPB(clkPB),
