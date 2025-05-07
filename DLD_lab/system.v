@@ -19,7 +19,7 @@ module system (
     one_pulser u_one_pulser (
         .rst(rst),
         .clk(clk),
-        .clkPB(clkPB),
+        .clkPB(~clkPB),
         .clkEN(clkEn)
     );
 
