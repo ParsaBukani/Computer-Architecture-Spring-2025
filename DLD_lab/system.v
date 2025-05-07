@@ -1,6 +1,6 @@
 `timescale 1ns/1ns
 
-module TopModule (
+module system (
     input clk, rst,
     input wire clkPB,
     input wire ser_in,
@@ -12,6 +12,7 @@ module TopModule (
     wire clkEn;
     wire cnt1, cnt2, cntD, ldcntD, sh_en, sh_enD, init_cnt1, init_cnt2;
     wire co1, co2, coD;
+    wire [4:0] data_num;
 
     one_pulser u_one_pulser (
         .rst(rst),
@@ -37,7 +38,8 @@ module TopModule (
         .init_cnt1(init_cnt1),
         .init_cnt2(init_cnt2),
         .Done(done),
-        .SerOutValid(SerOutValid)
+        .SerOutValid(SerOutValid),
+        .data_num(data_num)
     );
 
     DataPath u_datapath (
@@ -61,7 +63,8 @@ module TopModule (
         .p2(p2),
         .p3(p3),
         .SSD_out_1(SSD1),
-        .SSD_out_2(SSD2)
+        .SSD_out_2(SSD2),
+        .data_num(data_num)
     );
 
 endmodule

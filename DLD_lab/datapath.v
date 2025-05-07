@@ -46,7 +46,7 @@ module counter #(
         if (rst)
             cntout <= {m{1'b0}};
         else if (clk_en) begin
-            else if (ld) begin
+            if (ld) begin
                 cntout <= pin;
             end
             else if (init) begin
@@ -101,8 +101,8 @@ module up_down_counter #(
         end
     end
 
-    assign overflow = (cntout == {m{1'b1}});
-    assign underflow = (cntout == {m{1'b0}});
+    assign overflow = (cntout == {m{1'b1}}) ? 1'b1 : 1'b0;
+    assign underflow = (cntout == {m{1'b0}}) ? 1'b1 : 1'b0;
 
 endmodule
 
@@ -150,28 +150,29 @@ module Seven_Segment(count, SSD);
 endmodule
 
 module DataPath(
-    input wire clk;
-    input wire clk_en;
-    input wire rst;
-    input wire init_cnt1;
-    input wire init_cnt2;
-    input wire cnt1;
-    input wire cnt2;
-    input wire cntD;
-    input wire ld_cntD;
-    input wire sh_en;
-    input wire sh_enD;
-    input wire ser_in;
+    input wire clk,
+    input wire clk_en,
+    input wire rst,
+    input wire init_cnt1,
+    input wire init_cnt2,
+    input wire cnt1,
+    input wire cnt2,
+    input wire cntD,
+    input wire ld_cntD,
+    input wire sh_en,
+    input wire sh_enD,
+    input wire ser_in,
 
-    output wire co2;
-    output wire co1;
-    output wire coD;
-    output wire p0;
-    output wire p1;
-    output wire p2;
-    output wire p3;
-    output reg [6:0] SSD_out_1;
-    output reg [6:0] SSD_out_2;
+    output wire co2,
+    output wire co1,
+    output wire coD,
+    output wire [4:0] data_num,
+    output wire p0,
+    output wire p1,
+    output wire p2,
+    output wire p3,
+    output [6:0] SSD_out_1,
+    output [6:0] SSD_out_2
 );
 
 wire [1:0] port_num;
@@ -181,9 +182,10 @@ wire [4:0] dataTrans_out;
 wire [2:0] DataNam_out;
 wire [1:0] PortNam_out;
 wire [4:0] DataNam_sh_out;
-wire overflow, x_0, x_1, x_2, x_3, x_4;
+wire [1:0] PortNam_sh_in;
+wire overflow, x_0, x_1, x_2, x_3;
 
-
+assign data_num = num_data;
 
 counter #(3) DataNum_cnt (
     .clk(clk),
@@ -191,7 +193,7 @@ counter #(3) DataNum_cnt (
     .rst(rst),
     .ld(init_cnt2),
     .encnt(cnt2),
-    .init(0),
+    .init(1'b0),
     .pin(3'b011),
     .cntout(DataNam_out),
     .co(co2)
@@ -204,7 +206,7 @@ counter #(2) PortNum_cnt (
     .rst(rst),
     .ld(init_cnt1),
     .encnt(cnt1),
-    .init(0),
+    .init(1'b0),
     .pin(2'b10),
     .cntout(PortNam_out),
     .co(co1)
@@ -215,11 +217,11 @@ up_down_counter #(5) DataTrans_cnt (
     .clk_en(clk_en),
     .rst(rst),
     .ld(ld_cntD),
-    .init(0),
-    .encnt(1),
+    .init(1'b0),
+    .encnt(1'b1),
     .pin(num_data),
     .cntout(dataTrans_out),
-    .count_up(0),
+    .count_up(1'b0),
     .count_down(cntD),
     .overflow(x_0),
     .underflow(coD)
@@ -227,11 +229,11 @@ up_down_counter #(5) DataTrans_cnt (
 
 shift_register #(5) DataNam_sh (
     .clk(clk),
-    .clk_en(clk_en)
+    .clk_en(clk_en),
     .rst(rst),
     .shQ(sh_enD),
-    .ldQ(0),
-    .sin(x_1),
+    .ldQ(1'b0),
+    .sin(ser_in),
     .qin(DataNam_sh_out),
     .qout(num_data),
     .sout(x_2)
@@ -239,14 +241,14 @@ shift_register #(5) DataNam_sh (
 
 shift_register #(2) PortNum_sh (
     .clk(clk),
-    .clk_en(clk_en)
+    .clk_en(clk_en),
     .rst(rst),
     .shQ(sh_en),
-    .ldQ(0),
+    .ldQ(1'b0),
     .sin(ser_in),
-    .qin(x_3), 
+    .qin(PortNam_sh_in), 
     .qout(port_num),
-    .sout(x_4)
+    .sout(x_3)
 );
 
 demultiplexer dmux (

@@ -1,5 +1,49 @@
 `timescale 1ns/1ns
 
+module Adder_TB();
+	
+	logic [3:0] A = 3'd0, B = 3'd0;
+	logic Cin = 1'b0;
+	wire [3:0] AddRes;
+	wire Cout;
+	
+	Adder CUT(.a(A), .b(B), .cin(Cin), .res(AddRes), .cout(Cout));
+		
+	task add_1();
+		begin
+			$display("Add 1 is starting at time = %t", $time);
+			#10 
+			A = 3'd5; B = 3'd7;
+			#10
+			A = 3'd7;
+			#20
+			$display("Add 1 is end at time = %t", $time);
+		end
+	endtask
+	
+	task add_2();
+		begin
+			$display("Add 2 is starting at time = %t", $time);
+			#10 
+			A = 3'd9; B = 3'd2; Cin = 1'b1;
+			#10
+			A = 3'd12; Cin = 1'b0;
+			#20
+			$display("Add 2 is end at time = %t", $time);
+		end
+	endtask
+	
+	initial begin
+		$display("Start Adding");
+		add_1();
+		add_2();
+		$display("Finish Adding");
+		#1000 
+		$stop;
+	end
+
+endmodule
+
 
 module TopModule_tb;
 
