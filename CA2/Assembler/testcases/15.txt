@@ -1,4 +1,4 @@
-addi x2, x0, 100
+addi x2, x0, 0
 addi x4, x0, 0
 addi x5, x0, 20
 addi x6, x0, 5

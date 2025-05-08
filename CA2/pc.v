@@ -6,14 +6,17 @@ module risc_v_pc #(
     input wire clk,
     input wire reset,                   
     input wire [ADDR_WIDTH-1:0] next_pc,
-    output reg [ADDR_WIDTH-1:0] pc      
+    output [ADDR_WIDTH-1:0] pc      
 );
+    reg [ADDR_WIDTH-1:0] stored_pc;
 
     always @(posedge clk, posedge reset) begin
         if (reset)
-            pc <= {ADDR_WIDTH{1'b0}};
+            stored_pc <= {ADDR_WIDTH{1'b0}};
         else
-            pc <= next_pc;
+            stored_pc <= next_pc;
     end
+
+    assign pc = stored_pc;
 
 endmodule

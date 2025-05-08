@@ -107,6 +107,7 @@ module risc_V_controlUnit(
                     ResultSrc = 2'b10;
                     ImmSrc = 3'b100;
                 end
+                
             default
                 begin
                     RegWrite = 0;

@@ -13,9 +13,10 @@
 "bne x_i, x_j, label(Number)"
 "lui x_i, Number(20 bit)"
 
-"you can replace your assembly file name into these empty strings"
-InputFileName = "test.txt"
-OutputFileName = "test.mem"
+"you can replace your assembly file name into the empty strings: "
+# InputFileName = "test.txt"
+InputFileName = r"C:\Users\parsa\OneDrive\Desktop\Programming\python\Semester 4\CA\Computer-Architecture-Spring-2025\CA2\Assembler\testcases\16.txt"
+OutputFileName = r"C:\Users\parsa\OneDrive\Desktop\Programming\Verilog\Computer Architecture\CA2\test.mem"
 '--------------------------------------------------------------------------------------------------------------------'
 
 REGISTER_MAP = {
@@ -52,7 +53,7 @@ def parse_labels(filename):
             line = line.replace(')', ' ')
             parts = line.split()
             clean_lines.append(parts)
-            address += 1  # count instruction addresses
+            address += 1
 
     return label_addresses, clean_lines
 
@@ -187,9 +188,10 @@ def InstMaker(functionName="r_type"):
             inst = "001" + inst
         else:
             raise ValueError("can't make instruction")
-        inst = decimal_to_binary(5, x1[1]) + inst
-        inst = decimal_to_binary(5, x2[1]) + inst
+        inst = decimal_to_binary(5, x1[1:]) + inst
+        inst = decimal_to_binary(5, x2[1:]) + inst
         inst = imm_bin[-12] + imm_bin[-11:-5] + inst
+
         return inst
 
     def J_TypeInstMaker(rd, imm, opcode):
@@ -197,6 +199,7 @@ def InstMaker(functionName="r_type"):
         imm_bin = imm_bin[0] + imm_bin
         inst = decimal_to_binary(5, rd[1:]) + opcode
         inst = imm_bin[-20] + imm_bin[-11:-1] + imm_bin[-11] + imm_bin[-20:-12] + inst
+
         return inst
 
     def U_TypeInstMaker(rd, imm, opcode):
@@ -220,60 +223,72 @@ def InstMaker(functionName="r_type"):
     if selectedFunction:
         return selectedFunction
 
-def assemblerSim():
-    label_map, parsed_lines = parse_labels(InputFileName)
-    insts = []
-    
-    for pc, line in enumerate(parsed_lines):
-        line = normalize_registers(line)
-        func = line[0]
-        funcType = functionType(func)
-        opcode = opcodeDecider(funcType)
-        inst_maker = InstMaker(funcType)
-        instruction = ""
 
-        if funcType == "J_Type" and line[2] in label_map:
-            label_pc = label_map[line[2]]
-            offset = label_pc - pc
-            line[2] = str(offset << 2)
+def assembler_sim():
+    label_map, lines = parse_labels(InputFileName)
+    machine_codes = []
 
-        elif funcType == "B_Type" and line[3] in label_map:
-            label_pc = label_map[line[3]]
-            offset = label_pc - pc
-            line[3] = str(offset << 2)
+    for pc, parts in enumerate(lines):
+        parts = normalize_registers(parts)
+        mnemonic = parts[0].lower()
+        itype = functionType(mnemonic)
+        opcode = opcodeDecider(itype)
+        maker = InstMaker(itype)
 
-        if funcType == "R_Type":
-            rd, rs1, rs2 = line[1], line[2], line[3]
-            instruction = inst_maker(func, rd, rs1, rs2, opcode)
+        rd = rs1 = rs2 = imm_val = None
+        if itype == 'R_Type':
+            rd, rs1, rs2 = parts[1], parts[2], parts[3]
 
-        elif funcType in ["I_Type(lw)", "I_Type(Alu)", "I_Type(jalr)"]:
-            rd, rs1, imm = line[1], line[2], line[3]
-            instruction = inst_maker(func, rd, rs1, imm, opcode)
+        elif itype == 'I_Type(lw)':
+            rd, imm_val, rs1 = parts[1], parts[2], parts[3]
 
-        elif funcType == "S_Type":
-            rs2, imm, rs1 = line[1], line[2], line[3]
-            instruction = inst_maker(func, rs1, rs2, imm, opcode)
+        elif itype in ['I_Type(Alu)', 'I_Type(jalr)']:
+            rd, rs1, imm_val = parts[1], parts[2], parts[3]
 
-        elif funcType == "B_Type":
-            rs1, rs2, imm = line[1], line[2], line[3]
-            instruction = inst_maker(func, rs1, rs2, imm, opcode)
+        elif itype == 'S_Type':
+            rs2, imm_val, rs1 = parts[1], parts[2], parts[3]
 
-        elif funcType == "U_Type":
-            rd, imm = line[1], line[2]
-            instruction = inst_maker(rd, imm, opcode)
+        elif itype == 'B_Type':
+            rs1, rs2, label = parts[1], parts[2], parts[3]
+            if label not in label_map:
+                raise ValueError(f"Undefined label: {label}")
+            # offset in bytes from next instruction
+            offset = (label_map[label] - pc) << 2
+            imm_val = str(offset)
 
-        elif funcType == "J_Type":
-            rd, imm = line[1], line[2]
-            instruction = inst_maker(rd, imm, opcode)
+        elif itype == 'U_Type':
+            rd, imm_val = parts[1], parts[2]
+
+        elif itype == 'J_Type':
+            rd, label = parts[1], parts[2]
+            if label not in label_map:
+                raise ValueError(f"Undefined label: {label}")
+            offset = (label_map[label] - pc) << 2
+            imm_val = str(offset)
 
         else:
-            instruction = None
-        insts.append(instruction)
-    
-    return insts
+            raise ValueError(f"Unsupported mnemonic: {mnemonic}")
 
 
-insts = assemblerSim()
+        if itype == 'R_Type':
+            bin_inst = maker(mnemonic, rd, rs1, rs2, opcode)
+        elif itype in ['I_Type(lw)', 'I_Type(Alu)', 'I_Type(jalr)']:
+            bin_inst = maker(mnemonic, rd, rs1, imm_val, opcode)
+        elif itype == 'S_Type':
+            bin_inst = maker(mnemonic, rs1, rs2, imm_val, opcode)
+        elif itype == 'B_Type':
+            bin_inst = maker(mnemonic, rs1, rs2, imm_val, opcode)
+        elif itype == 'U_Type':
+            bin_inst = maker(rd, imm_val, opcode)
+        elif itype == 'J_Type':
+            bin_inst = maker(rd, imm_val, opcode)
+
+        machine_codes.append(bin_inst)
+
+    return machine_codes
+
+
+insts = assembler_sim()
 hex_list = [format(int(b, 2), '08X') for b in insts]
 with open(OutputFileName, 'w') as file:
     for i, item in enumerate(hex_list):

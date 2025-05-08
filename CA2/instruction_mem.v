@@ -14,7 +14,6 @@ module instructionMemory #(
 
     initial begin
         $readmemh("test.mem", RAM);
-        // $readmemh("instruction_memory_testbench.dat", RAM);
     end
 
     assign readData = RAM[address[MEM_ADDR_BITS+1:2]];

@@ -13,16 +13,9 @@ module riscv_testbench;
     always #5 clk = ~clk;
 
     initial begin
-        $display("Starting simulation...");
-
         clk = 0;
-        rst = 1;
-        #2;
-        rst = 0;
-
-        #100;
-
-        $display("Register x7 should contain 5 (1+4)");
+        rst = 1; #2; rst = 0;
+        #5000;
         $stop;
     end
 
