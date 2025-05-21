@@ -15,8 +15,8 @@
 
 "you can replace your assembly file name into the empty strings: "
 # InputFileName = "test.txt"
-InputFileName = r"C:\Users\parsa\OneDrive\Desktop\Programming\python\Semester 4\CA\Computer-Architecture-Spring-2025\CA2\Assembler\testcases\16.txt"
-OutputFileName = r"C:\Users\parsa\OneDrive\Desktop\Programming\Verilog\Computer Architecture\CA2\test.mem"
+InputFileName = r"C:\Users\parsa\OneDrive\Desktop\Programming\python\Semester 4\CA\Computer-Architecture-Spring-2025\CA2\Assembler\test.txt"
+OutputFileName = r"C:\Users\parsa\OneDrive\Desktop\Programming\python\Semester 4\CA\Computer-Architecture-Spring-2025\CA2\Assembler\test.mem"
 '--------------------------------------------------------------------------------------------------------------------'
 
 REGISTER_MAP = {
