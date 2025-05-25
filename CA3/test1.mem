@@ -1,0 +1,20 @@
+10010000   // [0] PUSH 16
+10010001   // [1] PUSH 17
+00000000   // [2] ADD
+10110010   // [3] POP 18
+10010011   // [4] PUSH 19
+11101010   // [5] JZ 10
+xxx00000   // [6] unused
+xxx00000   // [7] unused
+xxx00000   // [8] unused
+xxx00000   // [9] unused
+10010000   // [10] PUSH 16
+xxx00000   // [11] unused
+xxx00000   // [12] unused
+xxx00000   // [13] unused
+xxx00000   // [14] unused
+xxx00000   // [15] unused
+00000101   // [16] DATA = 5
+00000011   // [17] DATA = 3
+00000000   // [18] result will be stored here 
+00000000   // [19] used for JZ (is zero)

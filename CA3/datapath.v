@@ -19,7 +19,8 @@ module datapath (
     output wire [2:0] opcode
 );
 
-    wire [31:0] pc_current, pc_next;
+    wire [3:0] pc_current;
+    wire [4:0] next_pc;
     wire pc_enable, Zero;
 
     wire [4:0] mem_address;
@@ -40,7 +41,7 @@ module datapath (
         .clk(clk),
         .reset(rst),
         .enable(pc_enable),
-        .next_pc(pc_next),
+        .next_pc(next_pc[3:0]),
         .pc(pc_current)
     );
 
@@ -54,7 +55,7 @@ module datapath (
         .data_out(mem_data)
     );
 
-    assign mem_address = AdrSrc ? IR[4:0] : pc_current;
+    assign mem_address = AdrSrc ? IR[4:0] : {1'b0, pc_current};
 
     register mdr (
         .clk(clk),
@@ -101,7 +102,7 @@ module datapath (
     );  
 
     assign alu_srcA = ALUSrcA ? a_reg_out : 5'd1;  
-    assign alu_srcB = ALUSrcB ? stack_d_out : pc_current;
+    assign alu_srcB = ALUSrcB ? stack_d_out : {1'b0, pc_current};
 
     ALU alu (
         .sl(ALUControl),
