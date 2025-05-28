@@ -27,8 +27,4 @@ module DDSTestbench;
         $stop;
     end
 
-    // initial begin
-    //     $monitor("Time: %0t | Data: %d", $time, Data);
-    // end
-
 endmodule

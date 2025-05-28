@@ -59,47 +59,33 @@ counter cnt (
     
 endmodule
 
-// module counter #(
-//     parameter m = 6
-// ) (
-//     input wire clk,
-//     input wire rst,
-//     input wire ld,
-//     input wire encnt,
-//     input wire init,
-//     input wire [(m - 1):0] pin,
-//     output reg [(m - 1):0] cntout,
-//     output wire co
-// );
-//     always @(posedge clk or posedge rst) begin
-//         if (rst)
-//             cntout <= {m{1'b0}};
-//         else if (ld) begin
-//             cntout <= pin;
-//         end
-//         else if (init) begin
-//             cntout <= {m{1'b0}};
-//         end
-//         else if (encnt) begin
-//             cntout <= cntout + 1;
-//         end
-//     end
-
-//     assign co = &{cntout};
-    
-// endmodule
-
-
 module TwosCompliment(
     input wire SignSelector,
     input wire [8:0] In,
-    output reg [8:0] Out
+    output wire [8:0] Out
 );
     assign Out = SignSelector ? (~{In} + 1) : In;
 
 endmodule
 
+// for quartus compilation:
 module SinRom #(
+    parameter DATA_WIDTH     = 8,
+    parameter MEM_ADDR_BITS  = 6
+) (
+    input   [MEM_ADDR_BITS-1:0] address,
+    output  [DATA_WIDTH-1:0] readData
+);
+
+    (*romstyle = "M4K"*)(*ram_init_file = "sinc.mif"*) reg [DATA_WIDTH-1:0] RAM[2**MEM_ADDR_BITS-1:0];
+    assign readData = RAM[address];
+
+endmodule
+
+
+// for modlesim compilation:
+
+/*module SinRom #(
     parameter DATA_WIDTH     = 8,
     parameter MEM_ADDR_BITS  = 6
 ) (
@@ -115,7 +101,7 @@ module SinRom #(
 
     assign readData = RAM[address];
 
-endmodule
+endmodule*/
 
 module DSS(
     input wire clk,
