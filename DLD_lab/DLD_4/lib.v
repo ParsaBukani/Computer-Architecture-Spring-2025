@@ -56,3 +56,25 @@ module shift_register #(parameter n = 5) (
     assign sout = qout[n-1];
 
 endmodule
+
+
+module freqMux (
+    input wire a,        
+    input wire b,     
+    input wire sel,   
+    output wire clk 
+);
+
+  assign clk = sel ? a : b;
+
+endmodule
+
+module modeMux (
+    input wire [7:0] a,        
+    input wire sel,   
+    output wire [7:0] y  
+);
+
+  assign y = sel ? a : 8'd128;
+
+endmodule
