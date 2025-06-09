@@ -60,7 +60,8 @@ module MessageProcess_CTL (
     output reg shiftLd,
     output reg cnt10Init,
     output reg cnt4Ld,
-    output reg cnt10
+    output reg cnt10,
+    output reg valid
 );
 
     parameter [0:0]
@@ -90,7 +91,7 @@ module MessageProcess_CTL (
 
         case (ps)
             S0:  {cnt4Ld, shiftLd, cnt10Init} = 3'b111;
-            S1:  {cnt10} = 1'b1;
+            S1:  {cnt10, valid} = 2'b11;
         endcase
     end
 
