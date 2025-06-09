@@ -99,12 +99,13 @@ endmodule
 
 
 
-module MessageProcess(
+module MessageProcess (
     input wire clk,
     input wire rst,
     input wire send,
     input wire [4:0] message,
-    output wire data
+    output wire data,
+    output wire valid
 );
 
     wire co2, shiftLd, cnt10Init, cnt4Ld, cnt10;
@@ -117,7 +118,8 @@ module MessageProcess(
         .shiftLd(shiftLd),
         .cnt10Init(cnt10Init),
         .cnt4Ld(cnt4Ld),
-        .cnt10(cnt10)
+        .cnt10(cnt10),
+        .valid(valid)
     );
 
     MessageProcess_DP datapath (
