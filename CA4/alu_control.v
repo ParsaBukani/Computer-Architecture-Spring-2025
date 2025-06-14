@@ -10,7 +10,7 @@ module alu_control (
     always @(*) begin
         case (ALUOp)
             2'b00: ALUControl = 3'b000; // ADD for LW/SW/ADD
-            2'b01: ALUControl = 3'b001; // SUB for BEQ
+            2'b01: ALUControl = 3'b001; // SUB for Branch operations
             2'b10: begin // R-type
                 case ({funct7, funct3})
                     10'b0000000000: ALUControl = 3'b000; // ADD

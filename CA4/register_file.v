@@ -17,8 +17,7 @@ module risc_v_regfile # (
 
     reg [DATA_WIDTH-1:0] registers [0:31];
 
-
-    always @(posedge clk, posedge rst) begin
+    always @(negedge clk, posedge rst) begin
         if (rst) begin
             registers[0] = 32'b0;
         end

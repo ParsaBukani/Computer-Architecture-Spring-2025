@@ -14,9 +14,8 @@
 "lui x_i, Number(20 bit)"
 
 "you can replace your assembly file name into the empty strings: "
-# InputFileName = "test.txt"
-InputFileName = r"C:\Users\parsa\OneDrive\Desktop\Programming\python\Semester 4\CA\Computer-Architecture-Spring-2025\CA2\Assembler\test.txt"
-OutputFileName = r"C:\Users\parsa\OneDrive\Desktop\Programming\python\Semester 4\CA\Computer-Architecture-Spring-2025\CA2\Assembler\test.mem"
+InputFileName = r"C:\Users\parsa\OneDrive\Desktop\Programming\python\Semester 4\CA\Computer-Architecture-Spring-2025\CA4\Assembler\test.txt"
+OutputFileName = r"C:\Users\parsa\OneDrive\Desktop\Programming\python\Semester 4\CA\Computer-Architecture-Spring-2025\CA4\Assembler\test.mem"
 '--------------------------------------------------------------------------------------------------------------------'
 
 REGISTER_MAP = {

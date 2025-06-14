@@ -4,15 +4,14 @@ module risc_v_datapath (
     input wire clk,
     input wire rst,
 
-    // Control Signals to main_controller
+    // Control Signals
     output wire [6:0] opcode,
     output wire [2:0] funct3,
     output wire [6:0] funct7,
-
-    // Control Signals from main_controller
     input wire JumpD,
     input wire BranchD,
     input wire JALRSrcD,
+    input wire BranchSrcD,
     input wire [1:0] ResultSrcD,
     input wire MemWriteD,
     input wire [2:0] ALUControlD,
@@ -27,6 +26,12 @@ module risc_v_datapath (
     input wire FlushE,
     input wire [1:0] ForwardAE,
     input wire [1:0] ForwardBE,
+    output wire RegWriteM,
+    output wire RegWriteW,
+    output wire [1:0] ResultSrcE,
+    output wire [1:0] ResultSrcM,
+    output wire [1:0] ResultSrcW,
+    output wire PCSrcE,
     output wire [4:0] Rs1D,
     output wire [4:0] Rs2D,
     output wire [4:0] Rs1E,
@@ -34,20 +39,13 @@ module risc_v_datapath (
     output wire [4:0] RdE,
     output wire [4:0] RdM,
     output wire [4:0] RdW,
-    output wire [1:0] PCSrcE,
-    output wire ResultSrcE0,
-    output wire [1:0] ResultSrcM,
-    output wire RegWriteM,
-    output wire RegWriteW,
 
-    // Outputs for monitoring
     output wire ZeroE
 );
 
     // Fetch Stage
     wire [31:0] PCF, PCPlus4F, InstrF, NextPCF;
 
-    // PC and Instruction Fetch
     risc_v_pc pc (
         .clk(clk),
         .reset(rst),
@@ -67,7 +65,6 @@ module risc_v_datapath (
         .readData(InstrF)
     );
 
-    // IF/ID Register
     wire [31:0] PCD, InstrD, PCPlus4D;
 
     IF_ID_reg if_id (
@@ -84,9 +81,16 @@ module risc_v_datapath (
     );
 
     // Decode Stage
-    wire [31:0] RD1D, RD2D, ExtImmD;
+    wire [31:0] RD1D, RD2D, ExtImmD, ResultW;
+    wire [4:0] RdD;
 
-    // Register File and Immediate Extend
+    assign Rs1D = InstrD[19:15];
+    assign Rs2D = InstrD[24:20];
+    assign RdD = InstrD[11:7];
+    assign opcode = InstrD[6:0];
+    assign funct3 = InstrD[14:12];
+    assign funct7 = InstrD[31:25];
+
     risc_v_regfile regfile (
         .clk(clk),
         .rst(rst),
@@ -105,17 +109,9 @@ module risc_v_datapath (
         .ImmOut(ExtImmD)
     );
 
-    // Instruction Fields
-    assign Rs1D = InstrD[19:15];
-    assign Rs2D = InstrD[24:20];
-    assign RdD = InstrD[11:7];
-    assign opcode = InstrD[6:0];
-    assign funct3 = InstrD[14:12];
-    assign funct7 = InstrD[31:25];
-
-    // ID/EX Register
-    wire [31:0] RD1E, RD2E, ExtImmE, PCPlus4E;
-    wire [4:0] Rs1E, Rs2E, RdE;
+    wire [31:0] RD1E, RD2E, ExtImmE, PCPlus4E, PCE;
+    wire [2:0] ALUControlE;
+    wire BranchSrcE, JumpE;
 
     ID_EX_reg id_ex (
         .clk(clk),
@@ -130,6 +126,7 @@ module risc_v_datapath (
         .JumpD(JumpD),
         .BranchD(BranchD),
         .JALRSrcD(JALRSrcD),
+        .BranchSrcD(BranchSrcD),
         .PCD(PCD),
         .RD1D(RD1D),
         .RD2D(RD2D),
@@ -146,6 +143,7 @@ module risc_v_datapath (
         .JumpE(JumpE),
         .BranchE(BranchE),
         .JALRSrcE(JALRSrcE),
+        .BranchSrcE(BranchSrcE),
         .PCE(PCE),
         .RD1E(RD1E),
         .RD2E(RD2E),
@@ -156,9 +154,9 @@ module risc_v_datapath (
     );
 
     // Execute Stage
-    wire [31:0] SrcAE, SrcBE, ALUResultE, PCTargetE;
+    wire [31:0] SrcAE, WriteDataE, SrcBE, ALUResultE, ALUResultM, PCTargetE, ExtImmM;
+    wire BranchType;
 
-    // Forwarding Muxes
     mux_4to1 forward_a_mux (
         .data0(RD1E),
         .data1(ResultW),
@@ -174,18 +172,16 @@ module risc_v_datapath (
         .data2(ALUResultM),
         .data3(ExtImmM),
         .sel(ForwardBE),
-        .out(SrcBE)
+        .out(WriteDataE)
     );
 
-    // ALUSrc Mux
     mux_2to1 alusrc_mux (
-        .data0(SrcBE),
+        .data0(WriteDataE),
         .data1(ExtImmE),
         .sel(ALUSrcE),
         .out(SrcBE)
     );
 
-    // ALU
     ALU alu (
         .sl(ALUControlE),
         .Ain(SrcAE),
@@ -194,28 +190,25 @@ module risc_v_datapath (
         .Zero(ZeroE)
     );
 
-    // PC Target Adder
-    adder pc_target_adder (
-        .a(PCE),
-        .b(ExtImmE),
-        .sum(PCTargetE)
-    );
-
-    // JALR Mux (for rs1 + ExtImm)
     wire [31:0] JALRTargetE;
     mux_2to1 jalr_mux (
-        .data0(PCTargetE),
-        .data1(SrcAE + ExtImmE), // rs1 + ExtImm for JALR
+        .data0(PCE),
+        .data1(SrcAE), // change
         .sel(JALRSrcE),
         .out(JALRTargetE)
     );
 
-    // PCSrc Logic
-    assign PCSrcE = JumpE || (BranchE && ZeroE);
+    adder pc_target_adder (
+        .a(JALRTargetE),
+        .b(ExtImmE),
+        .sum(PCTargetE)
+    );
 
-    // EX/MEM Register
-    wire [31:0] ALUResultM, WriteDataM, ExtImmM, PCPlus4M;
-    wire [4:0] RdM;
+    assign BranchType = BranchSrcE ? ~ZeroE : ZeroE;
+    assign PCSrcE = JumpE || (BranchE && BranchType);
+
+    wire [31:0] WriteDataM, PCPlus4M;
+    wire MemWriteM;
 
     EX_MEM_reg ex_mem (
         .clk(clk),
@@ -224,7 +217,7 @@ module risc_v_datapath (
         .MemWriteE(MemWriteE),
         .RegWriteE(RegWriteE),
         .ALUResultE(ALUResultE),
-        .WriteDataE(SrcBE),
+        .WriteDataE(WriteDataE),
         .RdE(RdE),
         .ExtImmE(ExtImmE),
         .PCPlus4E(PCPlus4E),
@@ -249,9 +242,7 @@ module risc_v_datapath (
         .data_out(ReadDataM)
     );
 
-    // MEM/WB Register
     wire [31:0] ReadDataW, ALUResultW, ExtImmW, PCPlus4W;
-    wire [4:0] RdW;
 
     MEM_WB_reg mem_wb (
         .clk(clk),
@@ -273,8 +264,6 @@ module risc_v_datapath (
     );
 
     // Writeback Stage
-    wire [31:0] ResultW;
-
     mux_4to1 result_mux (
         .data0(ALUResultW),
         .data1(ReadDataW),
@@ -284,13 +273,10 @@ module risc_v_datapath (
         .out(ResultW)
     );
 
-    // PC Mux
-    mux_4to1 pc_mux (
+    mux_2to1 pc_mux (
         .data0(PCPlus4F),
-        .data1(JALRTargetE),
-        .data2(ALUResultE), // For JALR when JALRSrcE selects ALUResult
-        .data3(32'b0), // Unused
-        .sel({1'b0, PCSrcE}),
+        .data1(PCTargetE),
+        .sel(PCSrcE),
         .out(NextPCF)
     );
 

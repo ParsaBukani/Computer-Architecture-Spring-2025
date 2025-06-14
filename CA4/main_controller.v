@@ -7,6 +7,7 @@ module main_controller(
     output wire Jump,
     output wire Branch,
     output wire JALRSrc,
+    output wire BranchSrc,
     output wire [1:0] ResultSrc,
     output wire MemWrite,
     output wire [2:0] ALUControl,
@@ -15,24 +16,25 @@ module main_controller(
     output wire RegWrite
 );
 
-    wire [1:0] AluOp;
+    wire [1:0] ALUOp;
 
     risc_V_controlUnit CU (
         .opcode(opcode),
         .funct3(funct3),    
         .ResultSrc(ResultSrc),
         .MemWrite(MemWrite),
-        .AluOp(AluOp),
+        .ALUOp(ALUOp),
         .ALUSrc(ALUSrc),
         .ImmSrc(ImmSrc),
         .RegWrite(RegWrite),
         .Branch(Branch),
         .Jump(Jump),
-        .JALRSrc(JALRSrc)
+        .JALRSrc(JALRSrc),
+        .BranchSrc(BranchSrc)
     );
 
     alu_control ALU_CU (
-        .ALUOp(AluOp),
+        .ALUOp(ALUOp),
         .funct3(funct3),
         .funct7(funct7),
         .ALUControl(ALUControl)

@@ -11,11 +11,12 @@ module risc_V_controlUnit(
     output reg [1:0] ALUOp,
     output reg ALUSrc,
     output reg [2:0] ImmSrc,
-    output reg JALRSrc
+    output reg JALRSrc,
+    output reg BranchSrc
 );
 
     always @(*) begin
-        {RegWrite, ResultSrc, MemWrite, Jump, Branch, ALUOp, ALUSrc, ImmSrc, JALRSrc} = 13'b0;
+        {RegWrite, ResultSrc, MemWrite, Jump, Branch, ALUOp, ALUSrc, ImmSrc, JALRSrc, BranchSrc} = 14'b0;
 
         case (opcode)
             7'b0110011: // R-Type
@@ -29,6 +30,7 @@ module risc_V_controlUnit(
                     ALUSrc = 0;
                     ImmSrc = 3'bxxx; 
                     JALRSrc = 0;
+                    BranchSrc = 0;
                 end
 
             7'b0000011: // I-Type (Load)
@@ -42,6 +44,7 @@ module risc_V_controlUnit(
                     ALUSrc = 1;  
                     ImmSrc = 3'b000;  
                     JALRSrc = 0;
+                    BranchSrc = 0;
                 end
 
             7'b0010011: // I-Type (ALU)
@@ -55,6 +58,7 @@ module risc_V_controlUnit(
                     ALUSrc = 1;  
                     ImmSrc = 3'b000;  
                     JALRSrc = 0;
+                    BranchSrc = 0;
                 end
 
             7'b1100111: // I-Type (JALR)
@@ -68,6 +72,7 @@ module risc_V_controlUnit(
                     ALUSrc = 1;  
                     ImmSrc = 3'b000; 
                     JALRSrc = 1;
+                    BranchSrc = 0;
                 end
 
             7'b0100011: // S-Type
@@ -81,6 +86,7 @@ module risc_V_controlUnit(
                     ALUSrc = 1;  
                     ImmSrc = 3'b001;  
                     JALRSrc = 0;
+                    BranchSrc = 0;
                 end
 
             7'b1100011: // B-Type
@@ -94,6 +100,11 @@ module risc_V_controlUnit(
                     ALUSrc = 0;  
                     ImmSrc = 3'b010;  
                     JALRSrc = 0;
+                    case (funct3)
+                        3'b000: BranchSrc = 0;  // BEQ
+                        3'b001: BranchSrc = 1;  // BNE
+                        default: BranchSrc = 0;
+                    endcase
                 end
 
             7'b0110111: // U-Type (LUI)
@@ -107,6 +118,7 @@ module risc_V_controlUnit(
                     ALUSrc = 1'bx;  
                     ImmSrc = 3'b011; 
                     JALRSrc = 0;
+                    BranchSrc = 0;
                 end
 
             7'b1101111: // J-Type (JAL)
@@ -120,6 +132,7 @@ module risc_V_controlUnit(
                     ALUSrc = 1'bx;  
                     ImmSrc = 3'b100;  
                     JALRSrc = 0;
+                    BranchSrc = 0;
                 end
 
             default:
@@ -132,6 +145,7 @@ module risc_V_controlUnit(
                     ALUSrc = 1'bx;
                     ImmSrc = 3'bxxx;
                     JALRSrc = 0;
+                    BranchSrc = 0;
                 end
         endcase
     end

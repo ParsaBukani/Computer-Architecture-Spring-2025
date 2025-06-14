@@ -1,3 +1,5 @@
 addi x1, x0, 5
 addi x2, x0, 5
-beq  x1, x2, 8
+beq  x1, x2, LOOP
+
+LOOP:

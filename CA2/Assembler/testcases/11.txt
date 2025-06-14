@@ -1,3 +1,5 @@
 addi x1, x0, 4
 addi x2, x0, 5
-bne  x1, x2, 8
+bne  x1, x2, LOOP
+
+LOOP:

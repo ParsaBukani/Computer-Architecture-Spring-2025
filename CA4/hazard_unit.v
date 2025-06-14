@@ -1,3 +1,55 @@
+// `timescale 1ns/1ns
+
+// module HazardUnit(
+//     input wire RegWriteM,
+//     input wire RegWriteW,
+//     input wire [1:0] ResultSrcE,
+//     input wire [1:0] ResultSrcM,
+//     input wire [1:0] ResultSrcW,
+//     input wire PCSrcE,
+//     input wire [4:0] Rs1D,
+//     input wire [4:0] Rs2D,
+//     input wire [4:0] Rs1E,
+//     input wire [4:0] Rs2E,
+//     input wire [4:0] RdE,
+//     input wire [4:0] RdM,
+//     input wire [4:0] RdW,
+//     output reg StallF,
+//     output reg StallD,
+//     output reg FlushD,
+//     output reg FlushE,
+//     output reg [1:0] ForwardAE,
+//     output reg [1:0] ForwardBE
+// );
+
+//     // Forwarding logic for ALU operand A
+//     assign ForwardAE = ((Rs1E == RdM && RegWriteM) && Rs1E != 0) ? 2'b10 : // Forward ALUOutM
+//                        ((Rs1E == RdM && ResultSrcM == 2'b11) && Rs1E != 0) ? 2'b11 : // Forward ImmM (LUI)
+//                        (((Rs1E == RdW && RegWriteW) || (Rs1E == RdW && ResultSrcW == 2'b11)) && Rs1E != 0) ? 2'b01 : // Forward ResultW (including LUI)
+//                        2'b00; // No forwarding
+
+//     // Forwarding logic for ALU operand B
+//     assign ForwardBE = ((Rs2E == RdM && RegWriteM) && Rs2E != 0) ? 2'b10 :
+//                        ((Rs2E == RdM && ResultSrcM == 2'b11) && Rs2E != 0) ? 2'b11 :
+//                        (((Rs2E == RdW && RegWriteW) || (Rs2E == RdW && ResultSrcW == 2'b11)) && Rs2E != 0) ? 2'b01 : 
+//                        2'b00; 
+
+//     // Load - stall
+//     wire lwStall;
+//     assign lwStall = ((Rs1D == RdE || Rs2D == RdE) && ResultSrcE == 2'b01 && RdE != 0);
+
+//     // Stall signals
+//     assign StallF = lwStall;
+//     assign StallD = lwStall;
+
+//     // Flush signals
+//     assign FlushE = lwStall || PCSrcE;
+//     assign FlushD = PCSrcE;
+
+// endmodule
+
+
+
 `timescale 1ns/1ns
 
 module HazardUnit(
@@ -14,36 +66,50 @@ module HazardUnit(
     input wire [4:0] RdE,
     input wire [4:0] RdM,
     input wire [4:0] RdW,
-    output wire StallF,
-    output wire StallD,
-    output wire FlushD,
-    output wire FlushE,
-    output wire [1:0] ForwardAE,
-    output wire [1:0] ForwardBE
+    output reg StallF,
+    output reg StallD,
+    output reg FlushD,
+    output reg FlushE,
+    output reg [1:0] ForwardAE,
+    output reg [1:0] ForwardBE
 );
 
-    // Forwarding logic for ALU operand A
-    assign ForwardAE = ((Rs1E == RdM && RegWriteM) && Rs1E != 0) ? 2'b10 : // Forward ALUOutM
-                       (((Rs1E == RdW && RegWriteW) || (Rs1E == RdW && ResultSrcW == 2'b11)) && Rs1E != 0) ? 2'b01 : // Forward ResultW (including LUI)
-                       ((Rs1E == RdM && ResultSrcM == 2'b11) && Rs1E != 0) ? 2'b11 : // Forward ImmM (LUI)
-                       2'b00; // No forwarding
+    always @(*) begin
+        // ForwardAE logic
+        if ((Rs1E == RdM) && (RegWriteM) && (Rs1E != 0))
+            ForwardAE = 2'b10; // Forward from ALUOutM
+        else if ((Rs1E == RdM) && (ResultSrcM == 2'b11) && (Rs1E != 0))
+            ForwardAE = 2'b11; // Forward from ImmM (LUI)
+        else if (((Rs1E == RdW) && (RegWriteW)) || ((Rs1E == RdW) && (ResultSrcW == 2'b11)) && (Rs1E != 0))
+            ForwardAE = 2'b01; // Forward from ResultW
+        else
+            ForwardAE = 2'b00;
 
-    // Forwarding logic for ALU operand B
-    assign ForwardBE = ((Rs2E == RdM && RegWriteM) && Rs2E != 0) ? 2'b10 :
-                       (((Rs2E == RdW && RegWriteW) || (Rs2E == RdW && ResultSrcW == 2'b11)) && Rs2E != 0) ? 2'b01 : 
-                       ((Rs2E == RdM && ResultSrcM == 2'b11) && Rs2E != 0) ? 2'b11 :
-                       2'b00; 
+        // ForwardBE logic
+        if ((Rs2E == RdM) && (RegWriteM) && (Rs2E != 0))
+            ForwardBE = 2'b10;
+        else if ((Rs2E == RdM) && (ResultSrcM == 2'b11) && (Rs2E != 0))
+            ForwardBE = 2'b11;
+        else if (((Rs2E == RdW) && (RegWriteW)) || ((Rs2E == RdW) && (ResultSrcW == 2'b11)) && (Rs2E != 0))
+            ForwardBE = 2'b01;
+        else
+            ForwardBE = 2'b00;
+    end
 
-    // Load - stall
+    // Load-use hazard detection
     wire lwStall;
     assign lwStall = ((Rs1D == RdE || Rs2D == RdE) && ResultSrcE == 2'b01 && RdE != 0);
 
     // Stall signals
-    assign StallF = lwStall;
-    assign StallD = lwStall;
+    always @(*) begin
+        StallF = lwStall;
+        StallD = lwStall;
+    end
 
     // Flush signals
-    assign FlushE = lwStall || PCSrcE;
-    assign FlushD = PCSrcE;
+    always @(*) begin
+        FlushE = lwStall || PCSrcE;
+        FlushD = PCSrcE;
+    end
 
 endmodule

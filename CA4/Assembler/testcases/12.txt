@@ -1,1 +1,3 @@
-jal x1, 8
+jal x1, target
+addi x2, x0, 7
+target:

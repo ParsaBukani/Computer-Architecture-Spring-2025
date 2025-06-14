@@ -13,6 +13,7 @@ module ID_EX_reg (
     input wire JumpD,
     input wire BranchD,
     input wire JALRSrcD,
+    input wire BranchSrcD,
     input wire [31:0] PCD,
     input wire [31:0] RD1D,     
     input wire [31:0] RD2D,    
@@ -29,6 +30,7 @@ module ID_EX_reg (
     output reg JumpE,
     output reg BranchE,
     output reg JALRSrcE,
+    output reg BranchSrcE,
     output reg [31:0] PCE,
     output reg [31:0] RD1E,
     output reg [31:0] RD2E,
@@ -49,6 +51,7 @@ module ID_EX_reg (
             JumpE <= 0;
             BranchE <= 0;
             JALRSrcE <= 0;
+            BranchSrcE <= 0;
             PCE <= 0;
             RD1E <= 0;
             RD2E <= 0;
@@ -67,6 +70,7 @@ module ID_EX_reg (
             JumpE <= JumpD;
             BranchE <= BranchD;
             JALRSrcE <= JALRSrcD;
+            BranchSrcE <= BranchSrcD;
             PCE <= PCD;
             RD1E <= RD1D;
             RD2E <= RD2D;

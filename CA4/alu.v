@@ -5,7 +5,7 @@ module ALU (
     input wire [31:0] Ain,
     input wire [31:0] Bin,
     output reg [31:0] AluOut,
-    output wire Zero
+    output reg Zero
 );
 
     always @(*) begin
