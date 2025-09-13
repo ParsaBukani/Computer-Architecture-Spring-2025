@@ -26,7 +26,7 @@ This project implements a **pipelined processor** for the **RISC-V architecture*
     -   Simulation verifies correct pipeline behavior, hazard handling, and program output.
 
 ## Project Report
-_A detailed **Project Report** with design diagrams, simulation results, and analysis is available here: [Project_Report.pdf](https://github.com/ParsaBukani/Computer-Architecture-Spring-2025/blob/main/Maze%20in%20Rat/Content/Project%20Report.pdf)_
+_A detailed **Project Report** with design diagrams, simulation results, and analysis is available here: [Project_Report.pdf](https://github.com/ParsaBukani/Computer-Architecture-Spring-2025/blob/main/Pipelined%20RISC-V%20Processor/Content/Project%20Report.pdf)_
 
 ## License
 
