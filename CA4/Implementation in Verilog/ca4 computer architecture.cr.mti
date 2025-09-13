@@ -1,0 +1,133 @@
+{C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/IF_ID_reh.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/IF_ID_reh.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module IF_ID_reg
+
+Top level modules:
+	IF_ID_reg
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/alu.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/alu.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module ALU
+
+Top level modules:
+	ALU
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/register_file.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/register_file.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module risc_v_regfile
+
+Top level modules:
+	risc_v_regfile
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/MEM_WB_reg.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/MEM_WB_reg.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module MEM_WB_reg
+
+Top level modules:
+	MEM_WB_reg
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/RiscV_Pipelined.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/RiscV_Pipelined.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module risc_v_processor
+
+Top level modules:
+	risc_v_processor
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/EX_MEM_reg.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/EX_MEM_reg.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module EX_MEM_reg
+
+Top level modules:
+	EX_MEM_reg
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/hazard_unit.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/hazard_unit.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module HazardUnit
+
+Top level modules:
+	HazardUnit
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/alu_control.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/alu_control.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module alu_control
+
+Top level modules:
+	alu_control
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/imm_extend.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/imm_extend.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module ImmExtend
+
+Top level modules:
+	ImmExtend
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/systemTB.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/systemTB.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module riscv_testbench
+
+Top level modules:
+	riscv_testbench
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/memory_block.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/memory_block.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module risc_v_memory
+
+Top level modules:
+	risc_v_memory
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/pc.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/pc.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module risc_v_pc
+
+Top level modules:
+	risc_v_pc
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/sub_controller.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/sub_controller.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module risc_V_controlUnit
+
+Top level modules:
+	risc_V_controlUnit
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/ID_EX_reg.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/ID_EX_reg.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module ID_EX_reg
+
+Top level modules:
+	ID_EX_reg
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/datapath.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/datapath.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module risc_v_datapath
+
+Top level modules:
+	risc_v_datapath
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/lib.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/lib.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module mux_2to1
+-- Compiling module mux_3to1
+-- Compiling module mux_4to1
+-- Compiling module adder
+
+Top level modules:
+	mux_2to1
+	mux_3to1
+	mux_4to1
+	adder
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/instruction_mem.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/instruction_mem.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module instructionMemory
+
+Top level modules:
+	instructionMemory
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/main_controller.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA4/main_controller.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module main_controller
+
+Top level modules:
+	main_controller
+
+} {} {}}
