@@ -3,7 +3,12 @@
 _Computer Architecture — University of Tehran_
 
 This project implements a **hardware maze solver** composed of two main modules: **Memory Maze** for storing the environment and **Intelligent Rat** for navigation. The rat explores the maze using a **track-back algorithm** with movement priorities and stores successful paths in a FIFO buffer for future runs. The design is written in Verilog and tested through simulation and control signals.
+
+<p align="center">
+
 <img width="750" height="459" alt="Image" src="https://github.com/user-attachments/assets/a8762b81-4003-45a6-ab25-635f446ef125" />
+</p>
+
 
 ## Tasks
 
