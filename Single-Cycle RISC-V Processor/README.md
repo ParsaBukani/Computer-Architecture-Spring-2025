@@ -25,6 +25,9 @@ This project implements a **Single-Cycle processor** for the **RISC-V architectu
     -   Program is assembled for RISC-V and executed on the processor to validate functionality.  
     -   Simulation of datapath and control unit in Verilog.   
 
+## Project Report   
+_A detailed **Project Report** with design diagrams, simulation results, and analysis is available here: [Project_Report.pdf](https://github.com/ParsaBukani/Computer-Architecture-Spring-2025/blob/main/Single-Cycle%20RISC-V%20Processor/Content/Project%20Report.pdf)_
+
 
 ## License
 
