@@ -7,7 +7,8 @@ This project implements a **stack-based, multi-cycle processor** with an interna
 
 <p align="center">
     
-<img width="1536" height="1024" alt="Image" src="https://github.com/user-attachments/assets/d8f0e66e-412b-40cf-83a2-d52d289e0de3" />
+<img width="1024" height="1024" alt="Image" src="https://github.com/user-attachments/assets/b8cf5e30-3e28-41a2-ad5f-5b9c3e0c7f75" />
+
 </p>
 
 
