@@ -5,6 +5,11 @@ _Computer Architecture — University of Tehran_
 
 This project implements a **stack-based, multi-cycle processor** with an internal operand stack and an **8-bit data path** over a **5-bit address space**. The instruction set supports arithmetic and logic operations, memory access, and control flow. Instructions are executed through a multi-cycle FSM, where operands are managed via stack push and pop operations.
 
+<p align="center">
+    
+<img width="1536" height="1024" alt="Image" src="https://github.com/user-attachments/assets/d8f0e66e-412b-40cf-83a2-d52d289e0de3" />
+</p>
+
 
 ## Tasks
 
