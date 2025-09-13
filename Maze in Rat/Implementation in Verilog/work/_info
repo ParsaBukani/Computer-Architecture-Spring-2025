@@ -1,0 +1,521 @@
+m255
+K4
+z2
+!s11f vlog 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA/20.1
+vcontorller
+Z0 !s110 1745438208
+!i10b 1
+!s100 kI3]oQ=OB8e84NnDBJD;@3
+Z1 !s11b Dg1SIo80bB@j0V0VzS_@n1
+ITbY5o<GD=z:]eGS`GX[3=1
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+Z3 dC:/Users/parsa/OneDrive/Desktop/Programming/Verilog/Computer Architecture/CA1
+w1745437520
+8C:/Users/parsa/OneDrive/Desktop/Programming/Verilog/DLD_lab/controller.v
+FC:/Users/parsa/OneDrive/Desktop/Programming/Verilog/DLD_lab/controller.v
+!i122 576
+L0 3 58
+Z4 OV;L;2020.1;71
+r1
+!s85 0
+31
+Z5 !s108 1745438208.000000
+!s107 C:/Users/parsa/OneDrive/Desktop/Programming/Verilog/DLD_lab/controller.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/parsa/OneDrive/Desktop/Programming/Verilog/DLD_lab/controller.v|
+!i113 1
+Z6 o-work work
+Z7 tCvgOpt 0
+vcounter
+Z8 !s110 1745505261
+!i10b 1
+!s100 8ljceagEWh8z=KK0Qj8Um0
+R1
+Ig6S1hNRUAL;8b5Co]eBBA1
+R2
+R3
+Z9 w1744283553
+Z10 8C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/lib.v
+Z11 FC:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/lib.v
+!i122 578
+L0 37 29
+R4
+r1
+!s85 0
+31
+Z12 !s108 1745505261.000000
+Z13 !s107 C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/lib.v|
+Z14 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/lib.v|
+!i113 1
+R6
+R7
+vdecoder
+R8
+!i10b 1
+!s100 T1IQ<NRRDzPFIE`I?BPEO2
+R1
+IeQiZ?85=8C[S352`VH6kG0
+R2
+R3
+R9
+R10
+R11
+!i122 578
+L0 138 15
+R4
+r1
+!s85 0
+31
+R12
+R13
+R14
+!i113 1
+R6
+R7
+vmaze_controller
+R8
+!i10b 1
+!s100 ABQ[oEJ]``@:gXhF:35bZ2
+R1
+IhA`9Ioid=e9_5l@6OUIKH2
+R2
+R3
+w1745436108
+8C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/controller.v
+FC:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/controller.v
+!i122 580
+L0 3 124
+R4
+r1
+!s85 0
+31
+R12
+!s107 C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/controller.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/controller.v|
+!i113 1
+R6
+R7
+vmaze_datapath
+Z15 !s110 1745505262
+!i10b 1
+!s100 BA9Fa_JYC3[LUR:j75VmZ3
+R1
+I633nneRKNGZPhkQAm[?Fn2
+R2
+R3
+R9
+8C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/datapath.v
+FC:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/datapath.v
+!i122 581
+L0 3 116
+R4
+r1
+!s85 0
+31
+R12
+!s107 C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/datapath.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/datapath.v|
+!i113 1
+R6
+R7
+vmemory_block
+R8
+!i10b 1
+!s100 PPV5ObSgSMdPOX`?gaC=F3
+R1
+IbQgXmKGV6MeMK;H857Da73
+R2
+R3
+R9
+R10
+R11
+!i122 578
+L0 1 34
+R4
+r1
+!s85 0
+31
+R12
+R13
+R14
+!i113 1
+R6
+R7
+vmux
+R8
+!i10b 1
+!s100 OO;9e:f<`Ud83OLGO3LHY3
+R1
+I`70G6`JC5P77e<o[3:B7T1
+R2
+R3
+R9
+R10
+R11
+!i122 578
+L0 155 16
+R4
+r1
+!s85 0
+31
+R12
+R13
+R14
+!i113 1
+R6
+R7
+vQueue
+R15
+!i10b 1
+!s100 AHAhVPAlQ0IRR8Z_=f5fX2
+R1
+Idg3HL9nS=KTdkR0V27k2K0
+R2
+R3
+R9
+Z16 8C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/queue.v
+Z17 FC:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/queue.v
+!i122 584
+L0 107 45
+R4
+r1
+!s85 0
+31
+Z18 !s108 1745505262.000000
+!s107 C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/queue.v|
+Z19 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/queue.v|
+!i113 1
+R6
+R7
+n@queue
+vQueue_ctl
+R15
+!i10b 1
+!s100 XL]G9ZE[[o>aX>ddMUUOG3
+R1
+Ih;Ge4GJ5UX31@P0dHQakQ0
+R2
+R3
+R9
+R16
+R17
+!i122 584
+L0 58 48
+R4
+r1
+!s85 0
+31
+R18
+Z20 !s107 C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/queue.v|
+R19
+!i113 1
+R6
+R7
+n@queue_ctl
+vQueue_dp
+R15
+!i10b 1
+!s100 [8LVS=DJS5]izLQH=GQdF3
+R1
+I^K8Wo]Pk=;VFHCa_2>Kh62
+R2
+R3
+R9
+R16
+R17
+!i122 584
+L0 1 56
+R4
+r1
+!s85 0
+31
+R18
+R20
+R19
+!i113 1
+R6
+R7
+n@queue_dp
+vqueue_tb
+Z21 !s110 1744283033
+!i10b 1
+!s100 L0H:;A3VccOio?aMLbeBn1
+R1
+IU<Mnk4gSGfeI8Z=D9@d`z2
+R2
+R3
+Z22 w1744282756
+Z23 8C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/test_bench.v
+Z24 FC:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/test_bench.v
+!i122 548
+L0 136 81
+R4
+r1
+!s85 0
+31
+Z25 !s108 1744283033.000000
+Z26 !s107 C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/test_bench.v|
+Z27 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/test_bench.v|
+!i113 1
+R6
+R7
+vregister
+R8
+!i10b 1
+!s100 101QK<fjb[X@Y23khKn7d1
+R1
+Ikgha=NE0AE8bhecCE^Qzl0
+R2
+R3
+R9
+R10
+R11
+!i122 578
+L0 112 24
+R4
+r1
+!s85 0
+31
+R12
+R13
+R14
+!i113 1
+R6
+R7
+vshift_register
+!s110 1745438175
+!i10b 1
+!s100 Tc[SA620IzK8m?=L^@0<G1
+R1
+IOULk5hY[Dka3TAU1JRXg;0
+R2
+R3
+w1745435075
+8C:/Users/parsa/OneDrive/Desktop/Programming/Verilog/DLD_lab/datapath.v
+FC:/Users/parsa/OneDrive/Desktop/Programming/Verilog/DLD_lab/datapath.v
+!i122 575
+L0 3 26
+R4
+r1
+!s85 0
+31
+!s108 1745438175.000000
+!s107 C:/Users/parsa/OneDrive/Desktop/Programming/Verilog/DLD_lab/datapath.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/parsa/OneDrive/Desktop/Programming/Verilog/DLD_lab/datapath.v|
+!i113 1
+R6
+R7
+vStack
+R8
+!i10b 1
+!s100 [kOg43KC5NPjJaK9F>=1>1
+R1
+I6dFBPNgMFCP;HNRP_UVV83
+R2
+R3
+Z28 w1744269837
+Z29 8C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/stack.v
+Z30 FC:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/stack.v
+!i122 579
+L0 103 55
+R4
+r1
+!s85 0
+31
+R12
+Z31 !s107 C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/stack.v|
+Z32 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/stack.v|
+!i113 1
+R6
+R7
+n@stack
+vstack
+!s110 1743189823
+!i10b 1
+!s100 UeU368hQY2]_CgXgPmoGR0
+R1
+I9fFWZ:c=mWo3^c4IUK?zM3
+R2
+R3
+w1743189814
+R29
+R30
+!i122 31
+L0 104 57
+R4
+r1
+!s85 0
+31
+!s108 1743189822.000000
+R31
+R32
+!i113 1
+R6
+R7
+vstack_ctl
+R8
+!i10b 1
+!s100 g3KSGofOfPMAQ9H8zISH`2
+R1
+IZ_JGEng=f?O_G8A[85J:=2
+R2
+R3
+R28
+R29
+R30
+!i122 579
+L0 51 50
+R4
+r1
+!s85 0
+31
+R12
+R31
+R32
+!i113 1
+R6
+R7
+vstack_dp
+R8
+!i10b 1
+!s100 `dm5dVXN0LFGC6[EH[W4`1
+R1
+IFEK=G8Izgjo`5V1jKef3:1
+R2
+R3
+R28
+R29
+R30
+!i122 579
+L0 1 48
+R4
+r1
+!s85 0
+31
+R12
+R31
+R32
+!i113 1
+R6
+R7
+vstack_tb
+R21
+!i10b 1
+!s100 JQ1k:KM6961eGQkIfhhRa2
+R1
+I7e;>ngm@6m0>;PRZUzV]l3
+R2
+R3
+R22
+R23
+R24
+!i122 548
+L0 3 81
+R4
+r1
+!s85 0
+31
+R25
+R26
+R27
+!i113 1
+R6
+R7
+vsystem
+R15
+!i10b 1
+!s100 TNXIz4aL?SzTSPT9=V_nF3
+R1
+IK4VA0]63Ro>=5F1kiHV<H2
+R2
+R3
+R9
+8C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/system.v
+FC:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/system.v
+!i122 582
+L0 3 93
+R4
+r1
+!s85 0
+31
+R18
+!s107 C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/system.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA1/system.v|
+!i113 1
+R6
+R7
+vsystem_tb
+R15
+!i10b 1
+!s100 M5>TFS=6C84Nic[5zJY_[2
+R1
+IPNbZjnc2J=<UO=WkA^?SH2
+R2
+R3
+R9
+R23
+R24
+!i122 583
+L0 3 47
+R4
+r1
+!s85 0
+31
+R18
+R26
+R27
+!i113 1
+R6
+R7
+vtb_controller
+R0
+!i10b 1
+!s100 Z@14hbnB:ofVkdmd;<^QF2
+R1
+IJRm]IloSbV_<jT2VAhI>73
+R2
+R3
+w1745437899
+8C:/Users/parsa/OneDrive/Desktop/Programming/Verilog/DLD_lab/controller_tb.v
+FC:/Users/parsa/OneDrive/Desktop/Programming/Verilog/DLD_lab/controller_tb.v
+!i122 577
+L0 5 69
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/parsa/OneDrive/Desktop/Programming/Verilog/DLD_lab/controller_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/parsa/OneDrive/Desktop/Programming/Verilog/DLD_lab/controller_tb.v|
+!i113 1
+R6
+R7
+vup_down_counter
+R8
+!i10b 1
+!s100 bmYZgN>>NK?J6fibBzIh@3
+R1
+I`NMcom[6XK8CI]ig@kNTA2
+R2
+R3
+R9
+R10
+R11
+!i122 578
+L0 68 41
+R4
+r1
+!s85 0
+31
+R12
+R13
+R14
+!i113 1
+R6
+R7
