@@ -21,6 +21,8 @@ This project implements a **stack-based, multi-cycle processor** with an interna
     -   An assembly program computes the **sum of a 4-element array** starting at memory address 25.  
     -   The program is assembled, loaded into memory, and executed to verify processor functionality through simulation.
 
+## Project Report
+_A detailed **Project Report** with design diagrams, simulation results, and analysis is available here: [Project_Report.pdf](https://github.com/ParsaBukani/Computer-Architecture-Spring-2025/blob/main/Stack-Based%20Multi-Cycle%20Processor/Content/Project%20Report.pdf)_
 
 ## License
 
