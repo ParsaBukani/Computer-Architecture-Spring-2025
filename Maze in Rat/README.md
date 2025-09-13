@@ -36,7 +36,7 @@ This project implements a **hardware maze solver** composed of two main modules:
     -   The rat’s movement trace compared against the expected solution path.
 
 ## Project Report
-_A detailed **Project Report** with design diagrams, simulation results, and analysis is available here: [Project_Report.pdf]()_
+_A detailed **Project Report** with design diagrams, simulation results, and analysis is available here: [Project_Report.pdf](https://github.com/ParsaBukani/Computer-Architecture-Spring-2025/blob/main/Maze%20in%20Rat/Project%20Report.pdf)_
 
 ## License
 
