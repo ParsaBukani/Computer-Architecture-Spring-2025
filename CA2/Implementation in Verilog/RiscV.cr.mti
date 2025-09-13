@@ -1,0 +1,63 @@
+{C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA2/register_file.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA2/register_file.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module risc_v_regfile
+
+Top level modules:
+	risc_v_regfile
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA2/riscV.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA2/riscV.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module riscv
+
+Top level modules:
+	riscv
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA2/imm_extend.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA2/imm_extend.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module ImmExtend
+
+Top level modules:
+	ImmExtend
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA2/alu_control.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA2/alu_control.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module alu_control
+
+Top level modules:
+	alu_control
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA2/lib.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA2/lib.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module mux_2to1
+-- Compiling module mux_3to1
+-- Compiling module mux_4to1
+-- Compiling module adder
+
+Top level modules:
+	mux_2to1
+	mux_3to1
+	mux_4to1
+	adder
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA2/datapath.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA2/datapath.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module datapath
+
+Top level modules:
+	datapath
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA2/main_controller.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA2/main_controller.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module main_controller
+
+Top level modules:
+	main_controller
+
+} {} {}} {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA2/alu.v} {1 {vlog -work work -stats=none {C:/Users/parsa/OneDrive/Desktop/Programming/python/Semester 4/CA/Computer-Architecture-Spring-2025/CA2/alu.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module ALU
+
+Top level modules:
+	ALU
+
+} {} {}}
