@@ -16,10 +16,10 @@ They cover **memory-based problem solving**, **single-cycle and pipelined RISC-V
 
 | CA | Project Title                                | Description                                                                                       | Link |
 |----|----------------------------------------------|---------------------------------------------------------------------------------------------------|------|
-| **CA1** | Maze in Rat | Hardware maze solver with a 16×16 memory map and an intelligent rat module using a track-back algorithm. | [View](./CA1) |
-| **CA2** | Single-Cycle RISC-V Processor           | Single-cycle datapath and control unit for a RISC-V processor, tested by finding the maximum element in an array. | [View](./CA2) |
-| **CA3** | Stack-Based Multi-Cycle Processor       | Multi-cycle processor with an internal operand stack, supporting arithmetic, memory access, and branching instructions. | [View](./CA3) |
-| **CA4** | Pipelined RISC-V Processor              | Pipelined RISC-V processor with hazard detection and resolution, validated by running an array maximum program. | [View](./CA4) |
+| **CA1** | Maze in Rat | Hardware maze solver with a 16×16 memory map and an intelligent rat module using a track-back algorithm. | [View](https://github.com/ParsaBukani/Computer-Architecture-Spring-2025/tree/main/Maze%20in%20Rat) |
+| **CA2** | Single-Cycle RISC-V Processor           | Single-cycle datapath and control unit for a RISC-V processor, tested by finding the maximum element in an array. | [View](https://github.com/ParsaBukani/Computer-Architecture-Spring-2025/tree/main/Single-Cycle%20RISC-V%20Processor) |
+| **CA3** | Stack-Based Multi-Cycle Processor       | Multi-cycle processor with an internal operand stack, supporting arithmetic, memory access, and branching instructions. | [View](https://github.com/ParsaBukani/Computer-Architecture-Spring-2025/tree/main/Stack-Based%20Multi-Cycle%20Processor) |
+| **CA4** | Pipelined RISC-V Processor              | Pipelined RISC-V processor with hazard detection and resolution, validated by running an array maximum program. | [View](https://github.com/ParsaBukani/Computer-Architecture-Spring-2025/tree/main/Pipelined%20RISC-V%20Processor) |
 
 ## License
 
